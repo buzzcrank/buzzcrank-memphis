@@ -49,7 +49,7 @@ function mapEvent(record) {
   const eventLink = f['Event Link'] || f['Link'] || '';
 
   return {
-    title: f['Title'] || '',
+    title: f['Title'] || f['Name'] || '',
     date: f['Date'] || '',
     time: f['Time'] || f['Start Time'] || '',
     venue: f['Venue'] || '',
@@ -69,12 +69,10 @@ exports.handler = async () => {
       };
     }
 
-    const filterByFormula =
-      "AND({Status}='Approved', OR({Date} = BLANK(), {Date} >= TODAY()))";
-
+    // No filterByFormula for now – just pull all records.
     const records = await fetchAllRecords(AIRTABLE_EVENTS_TABLE, {
-      filterByFormula,
       fields: [
+        'Name',
         'Title',
         'Date',
         'Time',
@@ -83,13 +81,13 @@ exports.handler = async () => {
         'City',
         'Tags',
         'Event Link',
-        'Status'
+        'Link'
       ]
     });
 
     const events = records
       .map(mapEvent)
-      .filter(ev => ev.title && ev.date);
+      .filter(ev => ev.title); // keep only rows that actually have a title/name
 
     return {
       statusCode: 200,
@@ -108,4 +106,3 @@ exports.handler = async () => {
     };
   }
 };
-
