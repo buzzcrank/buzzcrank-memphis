@@ -6,15 +6,14 @@ const AIRTABLE_EVENTS_TABLE = process.env.AIRTABLE_EVENTS_TABLE || 'Events';
 
 const AIRTABLE_API_URL = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}`;
 
-async function fetchAllRecords(tableName, params = {}) {
+// Simple: fetch all records from a table with NO extra params
+async function fetchAllRecords(tableName) {
   const records = [];
   let offset;
 
   do {
-    const searchParams = new URLSearchParams({
-      ...params,
-      ...(offset ? { offset } : {})
-    });
+    const searchParams = new URLSearchParams();
+    if (offset) searchParams.append('offset', offset);
 
     const res = await fetch(
       `${AIRTABLE_API_URL}/${encodeURIComponent(tableName)}?${searchParams.toString()}`,
@@ -25,7 +24,6 @@ async function fetchAllRecords(tableName, params = {}) {
 
     if (!res.ok) {
       const text = await res.text();
-      // Include the Airtable response text in the error so we can see it
       throw new Error(`Airtable error (${res.status}): ${text}`);
     }
 
@@ -70,25 +68,10 @@ exports.handler = async () => {
       };
     }
 
-    // Simple: pull all rows from Events, no filter
-    const records = await fetchAllRecords(AIRTABLE_EVENTS_TABLE, {
-      fields: [
-        'Name',
-        'Title',
-        'Date',
-        'Time',
-        'Start Time',
-        'Venue',
-        'City',
-        'Tags',
-        'Event Link',
-        'Link'
-      ]
-    });
-
+    const records = await fetchAllRecords(AIRTABLE_EVENTS_TABLE);
     const events = records
       .map(mapEvent)
-      .filter(ev => ev.title);
+      .filter(ev => ev.title); // only rows with a title/name
 
     return {
       statusCode: 200,
@@ -101,13 +84,12 @@ exports.handler = async () => {
   } catch (err) {
     console.error('Error in events function:', err);
 
-    // TEMP: expose the error message so we can debug Airtable
     return {
       statusCode: 500,
       headers: { 'Access-Control-Allow-Origin': '*' },
       body: JSON.stringify({
         error: 'Failed to load events.',
-        details: err.message
+        details: err.message  // leave this for debugging for now
       })
     };
   }
