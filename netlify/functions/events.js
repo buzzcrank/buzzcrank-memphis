@@ -25,6 +25,7 @@ async function fetchAllRecords(tableName, params = {}) {
 
     if (!res.ok) {
       const text = await res.text();
+      // Include the Airtable response text in the error so we can see it
       throw new Error(`Airtable error (${res.status}): ${text}`);
     }
 
@@ -69,7 +70,7 @@ exports.handler = async () => {
       };
     }
 
-    // No filterByFormula for now – just pull all records.
+    // Simple: pull all rows from Events, no filter
     const records = await fetchAllRecords(AIRTABLE_EVENTS_TABLE, {
       fields: [
         'Name',
@@ -87,7 +88,7 @@ exports.handler = async () => {
 
     const events = records
       .map(mapEvent)
-      .filter(ev => ev.title); // keep only rows that actually have a title/name
+      .filter(ev => ev.title);
 
     return {
       statusCode: 200,
@@ -99,10 +100,15 @@ exports.handler = async () => {
     };
   } catch (err) {
     console.error('Error in events function:', err);
+
+    // TEMP: expose the error message so we can debug Airtable
     return {
       statusCode: 500,
       headers: { 'Access-Control-Allow-Origin': '*' },
-      body: JSON.stringify({ error: 'Failed to load events.' })
+      body: JSON.stringify({
+        error: 'Failed to load events.',
+        details: err.message
+      })
     };
   }
 };
