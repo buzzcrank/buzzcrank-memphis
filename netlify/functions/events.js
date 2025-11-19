@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-// netlify/functions/events.js
-exports.handler = async () => {
-  return {
-    statusCode: 200,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ ok: true, message: 'Buzzcrank events function is alive.' })
-  };
-};
-=======
 // netlify/functions/events.js
 
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
@@ -118,4 +108,3 @@ exports.handler = async () => {
     };
   }
 };
->>>>>>> 48fd376 (Wire Netlify functions to Airtable)
