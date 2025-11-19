@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Buzzcrank Admin – Memphis Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #050609;
+      --bg-alt: #10111a;
+      --bg-card: #161726;
+      --accent: #ffc400;
+      --accent-soft: #ffd85a;
+      --accent-green: #25e88c;
+      --accent-red: #ff5f5f;
+      --text-main: #f6f6fb;
+      --text-muted: #b6b6c6;
+      --border-subtle: rgba(255,255,255,0.08);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 45px rgba(0,0,0,0.75);
+      --transition-fast: 0.18s ease-out;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #1a1b30 0, #050609 50%, #020206 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main { flex: 1; }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* HEADER */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 1.4rem;
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0.7rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo-lockup {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .logo-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 16px;
+      background: radial-gradient(circle at 25% 0%, #fff6cc, #ffc400 40%, #a36100 100%);
+      box-shadow: 0 0 26px rgba(255,196,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #201300;
+    }
+
+    .logo-text-main {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+    }
+
+    .logo-text-sub {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.4rem 0.95rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: var(--text-main);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast);
+    }
+    .btn-pill:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    /* DASHBOARD */
+    #hero-admin {
+      padding: 1rem 0 0.4rem;
+    }
+
+    .hero-title-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-title-row h1 {
+      margin: 0;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-title-row p {
+      margin: 0.25rem 0 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 1rem;
+      margin: 1.3rem 0 1.8rem;
+    }
+
+    .metric-card {
+      background: var(--bg-card);
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      padding: 0.8rem 0.9rem;
+      box-shadow: var(--shadow-soft);
+      font-size: 0.8rem;
+    }
+
+    .metric-label {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .metric-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .metric-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-top: 0.35rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--text-muted);
+    }
+
+    .metric-pill span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px rgba(37,232,140,0.9);
+    }
+
+    .layout-main {
+      padding: 0.6rem 0 2.4rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .panel {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 1rem 1rem 0.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .panel-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+
+    .panel-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--text-muted);
+    }
+
+    .pill--green span {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px rgba(37,232,140,0.9);
+    }
+
+    .pill--red span {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-red);
+      box-shadow: 0 0 8px rgba(255,95,95,0.9);
+    }
+
+    .list {
+      margin: 0.2rem 0 0.8rem;
+      padding: 0;
+      list-style: none;
+      font-size: 0.8rem;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+
+    .list-item {
+      padding: 0.35rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .list-item:last-child {
+      border-bottom: none;
+    }
+
+    .list-primary {
+      font-weight: 600;
+    }
+
+    .list-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.08rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      font-size: 0.7rem;
+      margin-left: 0.35rem;
+    }
+
+    .badge--lead {
+      border-color: var(--accent-soft);
+      color: var(--accent-soft);
+    }
+
+    .badge--status-pending {
+      border-color: var(--accent-red);
+      color: var(--accent-red);
+    }
+
+    .badge--status-approved {
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    .link-small {
+      font-size: 0.75rem;
+      color: var(--accent-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .link-small:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 1rem 0 1.4rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .metrics-row {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+      }
+      .grid-2 {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .metrics-row {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="nav-inner">
+        <div class="logo-lockup">
+          <div class="logo-badge">BC</div>
+          <div>
+            <div class="logo-text-main">Buzzcrank Admin</div>
+            <div class="logo-text-sub">Memphis · Events · Sponsors · Artists</div>
+          </div>
+        </div>
+        <div class="nav-right">
+          <a href="/" class="btn-pill">← Public Site</a>
+          <!-- Optional: add direct Airtable view links here -->
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="hero-admin">
+        <div class="container">
+          <div class="hero-title-row">
+            <div>
+              <h1>Memphis Dashboard</h1>
+              <p>Quick snapshot of your events calendar, sponsor leads, and artist submissions pulled from Airtable.</p>
+            </div>
+          </div>
+
+          <!-- METRICS -->
+          <div class="metrics-row">
+            <div class="metric-card">
+              <div class="metric-label">Approved Upcoming Events</div>
+              <div class="metric-value" id="metricApproved">0</div>
+              <div class="metric-pill"><span></span> Live on site</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Pending / Suggested Events</div>
+              <div class="metric-value" id="metricPending">0</div>
+              <div class="metric-pill"><span></span> Needs review</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Sponsor Leads</div>
+              <div class="metric-value" id="metricLeads">0</div>
+              <div class="metric-pill"><span></span> Lead score ≥ 60</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Artist Submissions</div>
+              <div class="metric-value" id="metricArtists">0</div>
+              <div class="metric-pill"><span></span> Latest 30 days</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="layout-main">
+        <div class="container">
+          <div class="grid-2">
+            <!-- LEFT COLUMN: EVENTS -->
+            <div>
+              <!-- Approved events -->
+              <div class="panel">
+                <div class="panel-header">
+                  <div>
+                    <div class="panel-title">Approved Upcoming Events</div>
+                    <div class="panel-sub">What’s currently live on the public Buzzcrank Memphis calendar.</div>
+                  </div>
+                  <div class="pill pill--green">
+                    <span></span> Approved
+                  </div>
+                </div>
+                <ul class="list" id="listApproved">
+                  <!-- Filled by JS -->
+                </ul>
+                <a class="link-small" href="#" id="linkOpenAirtableEventsApproved" target="_blank">Open Airtable view</a>
+              </div>
+
+              <!-- Pending/suggested events -->
+              <div class="panel">
+                <div class="panel-header">
+                  <div>
+                    <div class="panel-title">Pending &amp; Suggested Events</div>
+                    <div class="panel-sub">Review and flip good ones to Approved so they show on the site.</div>
+                  </div>
+                  <div class="pill pill--red">
+                    <span></span> Needs Review
+                  </div>
+                </div>
+                <ul class="list" id="listPending">
+                  <!-- Filled by JS -->
+                </ul>
+                <a class="link-small" href="#" id="linkOpenAirtableEventsPending" target="_blank">Open Airtable view</a>
+              </div>
+            </div>
+
+            <!-- RIGHT COLUMN: LEADS + ARTISTS -->
+            <div>
+              <!-- Sponsor leads -->
+              <div class="panel">
+                <div class="panel-header">
+                  <div>
+                    <div class="panel-title">Sponsor / Ad Leads</div>
+                    <div class="panel-sub">Events the AI scout flagged as likely to have budget for ads or sponsorship.</div>
+                  </div>
+                </div>
+                <ul class="list" id="listLeads">
+                  <!-- Filled by JS -->
+                </ul>
+                <a class="link-small" href="#" id="linkOpenAirtableLeads" target="_blank">Open Airtable view</a>
+              </div>
+
+              <!-- Artists -->
+              <div class="panel">
+                <div class="panel-header">
+                  <div>
+                    <div class="panel-title">Artist Submissions</div>
+                    <div class="panel-sub">Recent bands who submitted via the site or were added manually.</div>
+                  </div>
+                </div>
+                <ul class="list" id="listArtists">
+                  <!-- Filled by JS -->
+                </ul>
+                <a class="link-small" href="#" id="linkOpenAirtableArtists" target="_blank">Open Airtable view</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>Buzzcrank Memphis Admin</div>
+        <div id="adminStatus" style="font-size:0.75rem;color:var(--text-muted);">
+          Loading data from Airtable…
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const dashboardEndpoint = '/.netlify/functions/admin-dashboard';
+
+    // Optional: drop your Airtable shared view links here for convenience
+    document.getElementById('linkOpenAirtableEventsApproved').href = '#';
+    document.getElementById('linkOpenAirtableEventsPending').href = '#';
+    document.getElementById('linkOpenAirtableLeads').href = '#';
+    document.getElementById('linkOpenAirtableArtists').href = '#';
+
+    const metricApproved = document.getElementById('metricApproved');
+    const metricPending = document.getElementById('metricPending');
+    const metricLeads = document.getElementById('metricLeads');
+    const metricArtists = document.getElementById('metricArtists');
+
+    const listApproved = document.getElementById('listApproved');
+    const listPending = document.getElementById('listPending');
+    const listLeads = document.getElementById('listLeads');
+    const listArtists = document.getElementById('listArtists');
+    const adminStatus = document.getElementById('adminStatus');
+
+    const fallbackDashboard = {
+      approvedEvents: [
+        {
+          title: "Delta Tea & The River Ghosts – Ghosts of Memphis Live",
+          date: "2025-09-12",
+          time: "20:00",
+          venue: "Hernando Street Theater",
+          city: "Memphis, TN",
+          tags: ["Blues Revival"],
+          status: "Approved"
+        }
+      ],
+      pendingEvents: [
+        {
+          title: "Sunday Soul Sessions – Gospel Brunch Jam",
+          date: "2025-09-14",
+          time: "11:00",
+          venue: "Beale Street Loft",
+          city: "Memphis, TN",
+          status: "Pending"
+        }
+      ],
+      sponsorLeads: [
+        {
+          title: "Riverfront Revival: Blues, BBQ & Boats",
+          date: "2025-09-13",
+          time: "18:00",
+          venue: "Riverside Park",
+          city: "Memphis, TN",
+          leadScore: 82
+        }
+      ],
+      artists: [
+        {
+          name: "Delta Tea & The River Ghosts",
+          city: "Memphis, TN",
+          genre: "Blues Revival",
+          status: "Featured",
+          createdAt: "2025-09-01"
+        }
+      ]
+    };
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr + "T00:00");
+      if (isNaN(d)) return dateStr;
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }
+
+    function formatTime(time24) {
+      if (!time24) return "";
+      const [hStr, mStr] = time24.split(':');
+      let h = parseInt(hStr, 10);
+      const m = mStr || '00';
+      const suffix = h >= 12 ? 'PM' : 'AM';
+      if (h === 0) h = 12;
+      else if (h > 12) h -= 12;
+      return `${h}:${m}${suffix}`;
+    }
+
+    function renderEventList(target, events, opts = {}) {
+      target.innerHTML = "";
+      if (!events || !events.length) {
+        const li = document.createElement('li');
+        li.className = 'list-item';
+        li.textContent = opts.emptyText || 'No items yet.';
+        target.appendChild(li);
+        return;
+      }
+
+      const sorted = [...events].sort((a, b) => {
+        const ad = new Date(a.date + "T" + (a.time || "00:00"));
+        const bd = new Date(b.date + "T" + (b.time || "00:00"));
+        return ad - bd;
+      });
+
+      sorted.forEach(ev => {
+        const li = document.createElement('li');
+        li.className = 'list-item';
+
+        const primary = document.createElement('div');
+        primary.className = 'list-primary';
+        primary.textContent = ev.title || ev.name || 'Untitled';
+
+        if (ev.leadScore && opts.showLeadBadge) {
+          const badge = document.createElement('span');
+          badge.className = 'badge badge--lead';
+          badge.textContent = `Lead ${ev.leadScore}`;
+          primary.appendChild(badge);
+        }
+
+        if (ev.status && opts.showStatusBadge) {
+          const badge = document.createElement('span');
+          badge.className = 'badge ' + (ev.status.toLowerCase() === 'approved'
+            ? 'badge--status-approved'
+            : 'badge--status-pending');
+          badge.textContent = ev.status;
+          primary.appendChild(badge);
+        }
+
+        const meta = document.createElement('div');
+        meta.className = 'list-meta';
+
+        if (ev.date) {
+          const timeText = ev.time ? formatTime(ev.time) + " · " : "";
+          meta.textContent = `${formatDate(ev.date)} · ${timeText}${ev.venue || ''}${ev.venue ? ' · ' : ''}${ev.city || ''}`;
+        } else if (ev.genre || ev.city) {
+          meta.textContent = [ev.genre, ev.city].filter(Boolean).join(' · ');
+        }
+
+        if (ev.createdAt && opts.showCreatedAt) {
+          meta.textContent += meta.textContent ? ` · Submitted ${formatDate(ev.createdAt)}` : `Submitted ${formatDate(ev.createdAt)}`;
+        }
+
+        li.appendChild(primary);
+        if (meta.textContent) li.appendChild(meta);
+        target.appendChild(li);
+      });
+    }
+
+    function updateMetrics(data) {
+      metricApproved.textContent = (data.approvedEvents || []).length;
+      metricPending.textContent = (data.pendingEvents || []).length;
+      metricLeads.textContent = (data.sponsorLeads || []).length;
+      metricArtists.textContent = (data.artists || []).length;
+    }
+
+    async function loadDashboard() {
+      try {
+        const res = await fetch(dashboardEndpoint);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+
+        updateMetrics(data);
+
+        renderEventList(listApproved, data.approvedEvents, {
+          emptyText: 'No approved events yet.',
+          showStatusBadge: true
+        });
+        renderEventList(listPending, data.pendingEvents, {
+          emptyText: 'No pending events right now.',
+          showStatusBadge: true
+        });
+        renderEventList(listLeads, data.sponsorLeads, {
+          emptyText: 'No sponsor leads yet.',
+          showLeadBadge: true
+        });
+        renderEventList(listArtists, data.artists, {
+          emptyText: 'No artist submissions yet.',
+          showCreatedAt: true
+        });
+
+        adminStatus.textContent = 'Data loaded from Airtable.';
+      } catch (err) {
+        console.error('Error loading admin dashboard:', err);
+        // Use fallback demo data
+        updateMetrics(fallbackDashboard);
+        renderEventList(listApproved, fallbackDashboard.approvedEvents, { showStatusBadge: true });
+        renderEventList(listPending, fallbackDashboard.pendingEvents, { showStatusBadge: true });
+        renderEventList(listLeads, fallbackDashboard.sponsorLeads, { showLeadBadge: true });
+        renderEventList(listArtists, fallbackDashboard.artists, { showCreatedAt: true });
+        adminStatus.textContent = 'Using demo data – wire up /.netlify/functions/admin-dashboard to Airtable.';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadDashboard);
+  </script>
+</body>
+</html>

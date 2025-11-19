@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Buzzcrank – Things To Do & Memphis Blues Revival Radio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Buzzcrank is your guide to things to do plus a 24/7 Memphis Blues Revival stream. Discover shows, events, and new bands while you listen." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #050609;
+      --bg-alt: #10111a;
+      --bg-card: #161726;
+      --accent: #ffc400;
+      --accent-soft: #ffd85a;
+      --accent-blue: #27c1ff;
+      --accent-green: #25e88c;
+      --text-main: #f6f6fb;
+      --text-muted: #b6b6c6;
+      --border-subtle: rgba(255,255,255,0.08);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 45px rgba(0,0,0,0.75);
+      --transition-fast: 0.18s ease-out;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #1a1b30 0, #050609 50%, #020206 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .page-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main { flex: 1; }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* TOP SPONSOR STRIP */
+    .sponsor-strip {
+      background: #0b0b12;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .sponsor-strip-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0.35rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .sponsor-strip-inner::-webkit-scrollbar { display: none; }
+
+    .sponsor-strip-label {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-soft);
+      white-space: nowrap;
+    }
+
+    .sponsor-logo-pill {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      padding: 0.2rem 0.7rem;
+      white-space: nowrap;
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* HEADER + MINI PLAYER */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0.7rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo-lockup {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-width: 0;
+    }
+
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      background: radial-gradient(circle at 25% 0%, #fff6cc, #ffc400 40%, #a36100 100%);
+      box-shadow: 0 0 26px rgba(255,196,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #201300;
+    }
+
+    .logo-text-main {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+
+    .logo-text-sub {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-width: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.3rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.35rem;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--accent);
+      transition: width var(--transition-fast);
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.42rem 1.05rem;
+      border-radius: var(--radius-pill);
+      border: none;
+      background: var(--accent);
+      color: #1b1300;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      cursor: pointer;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.85);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+      white-space: nowrap;
+    }
+    .btn-pill:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.06);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.9);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--text-main);
+      box-shadow: none;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.07);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.75);
+    }
+
+    /* MINI PLAYER */
+    .mini-player {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.22rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: radial-gradient(circle at 0 0, rgba(255,196,0,0.28), rgba(5,6,14,0.96));
+      box-shadow: 0 10px 28px rgba(0,0,0,0.8);
+      max-width: 310px;
+      min-width: 0;
+    }
+
+    .mini-player button {
+      border-radius: 999px;
+      border: none;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #050506;
+      color: var(--accent-soft);
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.22);
+      transition: transform var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .mini-player button:hover {
+      transform: translateY(-1px);
+      background: #111119;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.4), 0 12px 24px rgba(0,0,0,0.8);
+    }
+
+    .mini-meta {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .mini-station {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-soft);
+      white-space: nowrap;
+    }
+
+    .mini-track {
+      font-size: 0.76rem;
+      color: var(--text-main);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .mini-status {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    audio { display: none; }
+
+    /* HERO / FILTER BAR */
+    #hero {
+      padding: 2.2rem 0 0.4rem;
+    }
+
+    .hero-title-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-title-block h1 {
+      margin: 0;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-title-block p {
+      margin: 0.35rem 0 0;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .filter-bar {
+      margin-top: 1.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      background: rgba(5,5,12,0.9);
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+    }
+
+    .filter-tab--active {
+      border-color: var(--accent);
+      background: rgba(255,196,0,0.12);
+      color: var(--accent-soft);
+    }
+
+    .filter-tagline {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* MAIN LAYOUT */
+    .layout-main {
+      padding: 1.6rem 0 2.4rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 3.1fr) minmax(0, 1.9fr);
+      gap: 1.8rem;
+      align-items: flex-start;
+    }
+
+    /* EVENTS LIST */
+    .events-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .events-list-scroll {
+      max-height: 650px;
+      overflow-y: auto;
+      padding-right: 0.25rem;
+    }
+
+    .event-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 0.9rem 1rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.85rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .event-date {
+      width: 60px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 20% 0, #ffe9b6, #ffc400 45%, #a35a05 100%);
+      color: #1b1300;
+      text-align: center;
+      padding: 0.45rem 0.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .event-date strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+    }
+
+    .event-main {
+      min-width: 0;
+    }
+
+    .event-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.1rem;
+    }
+
+    .event-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.45rem;
+    }
+
+    .event-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--text-muted);
+    }
+
+    .event-tag--featured {
+      border-color: var(--accent-soft);
+      color: var(--accent-soft);
+    }
+
+    .event-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .event-link {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-soft);
+    }
+
+    .event-link:hover {
+      text-decoration: underline;
+    }
+
+    /* SIDEBAR */
+    .sidebar-section {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 1.1rem 1rem 1rem;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-heading {
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .sidebar-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 0 0 0.45rem;
+    }
+
+    .sidebar-text {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin: 0 0 0.7rem;
+    }
+
+    .featured-band-item {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.86rem;
+    }
+
+    .featured-band-item:last-child {
+      border-bottom: none;
+    }
+
+    .featured-band-name {
+      font-weight: 600;
+    }
+
+    .featured-band-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .sidebar-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--accent-soft);
+      margin-bottom: 0.4rem;
+    }
+
+    .sidebar-badge span {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #25e88c;
+      box-shadow: 0 0 10px rgba(37,232,140,0.9);
+    }
+
+    /* AD SLOTS */
+    .ad-slot {
+      border-radius: 16px;
+      border: 1px dashed rgba(255,255,255,0.22);
+      background: rgba(0,0,0,0.3);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 0.8rem;
+      text-align: center;
+    }
+
+    .ad-slot span {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    /* SUBMIT FORM */
+    .submit-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem 0.9rem;
+      margin-top: 0.9rem;
+    }
+
+    .submit-form .full {
+      grid-column: 1 / -1;
+    }
+
+    .submit-form label {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .submit-form input,
+    .submit-form textarea {
+      width: 100%;
+      padding: 0.5rem 0.6rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(5,6,14,0.95);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-family: inherit;
+    }
+
+    .submit-form textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .submit-form input::placeholder,
+    .submit-form textarea::placeholder {
+      color: rgba(181,181,198,0.7);
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 1.2rem 0 1.6rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a:hover { color: var(--accent-soft); }
+
+    /* RESPONSIVE */
+    @media (max-width: 980px) {
+      .two-col {
+        grid-template-columns: minmax(0,1fr);
+      }
+
+      .submit-form {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .mini-player {
+        display: none;
+      }
+      .hero-title-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .filter-bar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .btn-pill {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <!-- SPONSOR STRIP -->
+    <div class="sponsor-strip">
+      <div class="sponsor-strip-inner">
+        <div class="sponsor-strip-label">Launch Sponsors</div>
+        <div class="sponsor-logo-pill">Your Sponsor #1</div>
+        <div class="sponsor-logo-pill">Your Sponsor #2</div>
+        <div class="sponsor-logo-pill">Your Sponsor #3</div>
+      </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="nav-inner">
+        <div class="logo-lockup">
+          <div class="logo-badge">BC</div>
+          <div>
+            <div class="logo-text-main">Buzzcrank</div>
+            <div class="logo-text-sub">Things To Do · Memphis Blues Revival Radio</div>
+          </div>
+        </div>
+
+        <div class="nav-right">
+          <div class="mini-player" aria-label="Buzzcrank Memphis mini player">
+            <button id="playToggle" aria-label="Play stream">▶</button>
+            <div class="mini-meta">
+              <div class="mini-station">Memphis Blues Revival</div>
+              <div class="mini-track" id="miniTrack">Live stream – Buzzcrank</div>
+              <div class="mini-status" id="miniStatus">Tap play to start listening</div>
+            </div>
+            <!-- Replace STREAM_URL_HERE with your clean streaming URL -->
+            <audio id="bcAudio" src="https://comfy-meerkat-e400e1.netlify.app/buzzcrank-revival-live.html"></audio>
+          </div>
+
+          <nav class="nav-links">
+            <a href="#events">Events</a>
+            <a href="#bands">Featured Bands</a>
+            <a href="#sponsors">Sponsors</a>
+            <a href="#about">About</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section id="hero">
+        <div class="container">
+          <div class="hero-title-row">
+            <div class="hero-title-block">
+              <h1>Things To Do · Memphis</h1>
+              <p>Shows, festivals, and riverfront nights—curated to match the Buzzcrank Memphis Blues Revival stream.</p>
+            </div>
+            <a href="#"
+               id="heroListenButton"
+               class="btn-pill"
+               style="display:none;">▶ Listen Live</a>
+          </div>
+
+          <div class="filter-bar">
+            <div class="filter-tabs">
+              <button class="filter-tab filter-tab--active" type="button">Upcoming</button>
+              <button class="filter-tab" type="button">Today</button>
+              <button class="filter-tab" type="button">This Week</button>
+              <button class="filter-tab" type="button">All Events</button>
+            </div>
+            <div class="filter-tagline">
+              Scroll the list, find a night, keep the station on while you plan.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MAIN LAYOUT -->
+      <section id="events" class="layout-main">
+        <div class="container">
+          <div class="two-col">
+            <!-- EVENTS COLUMN -->
+            <div class="events-list events-list-scroll" id="eventsList">
+              <!-- JS will inject event cards pulled from Airtable -->
+            </div>
+
+            <!-- SIDEBAR COLUMN -->
+            <aside>
+              <!-- FEATURED BANDS + SUBMIT MUSIC -->
+              <section id="bands" class="sidebar-section">
+                <div class="sidebar-heading">Featured Bands</div>
+                <h2 class="sidebar-title">Delta Tea &amp; The River Ghosts</h2>
+                <p class="sidebar-text">
+                  Nine-piece revival band blending Memphis blues, soul, gospel, and rock. In heavy rotation on the Buzzcrank Memphis stream.
+                </p>
+
+                <div class="featured-band-item">
+                  <div class="featured-band-name">Delta Tea &amp; The River Ghosts</div>
+                  <div class="featured-band-note">“Ghosts of Memphis” · Buzzcrank Spotlight</div>
+                </div>
+                <div class="featured-band-item">
+                  <div class="featured-band-name">Future Local Band #2</div>
+                  <div class="featured-band-note">Add another featured act here.</div>
+                </div>
+
+                <div style="margin-top:0.8rem;">
+                  <div class="sidebar-badge">
+                    <span></span> Artist Submissions Open
+                  </div>
+                  <p class="sidebar-text" style="margin-bottom:0.5rem;">
+                    Are you an artist with blues, soul, or southern rock in your veins? Submit your music to be considered for Buzzcrank Memphis.
+                  </p>
+                  <a href="mailto:submissions@buzzcrank.com" class="btn-pill" style="font-size:0.76rem;">
+                    Submit Your Music
+                  </a>
+                </div>
+              </section>
+
+              <!-- SPONSOR AD SLOTS -->
+              <section id="sponsors" class="sidebar-section">
+                <div class="sidebar-heading">Sponsors</div>
+                <h2 class="sidebar-title">Support the Revival</h2>
+                <p class="sidebar-text">
+                  Local sponsors keep the stream running and the events list free. Want your logo or ad here? We’re building launch packages now.
+                </p>
+
+                <div class="ad-slot" style="margin-bottom:0.7rem;">
+                  <span>300 × 250 ad – Top Sponsor</span>
+                </div>
+                <div class="ad-slot">
+                  <span>300 × 250 ad – Secondary Sponsor</span>
+                </div>
+              </section>
+
+              <!-- ABOUT SIDEBAR -->
+              <section id="about" class="sidebar-section">
+                <div class="sidebar-heading">About</div>
+                <h2 class="sidebar-title">What Is Buzzcrank?</h2>
+                <p class="sidebar-text">
+                  Buzzcrank stitches together two things: a real 24/7 Memphis Blues Revival stream and a simple, no-BS guide to what’s happening in town.
+                  As we add more cities, each will get its own events list, stream, and featured bands.
+                </p>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUBMIT EVENT FORM -->
+      <section id="submit-event">
+        <div class="container">
+          <div class="sidebar-section" style="max-width:780px;margin:0 auto 2rem auto;">
+            <div class="sidebar-heading">Submit an Event</div>
+            <h2 class="sidebar-title">Get Your Show On the List</h2>
+            <p class="sidebar-text">
+              Fill this out to request a listing on the Buzzcrank “Things To Do” calendar. We’ll review it and add it if it fits the Memphis Blues Revival vibe.
+            </p>
+
+            <!-- Netlify form – entries can be piped into Airtable via automation -->
+            <form
+              name="buzzcrank-event"
+              method="POST"
+              data-netlify="true"
+              class="submit-form"
+            >
+              <input type="hidden" name="form-name" value="buzzcrank-event" />
+
+              <div>
+                <label for="event-title">Event Title</label>
+                <input id="event-title" name="Event Title" type="text" required placeholder="Ghosts of Memphis Live" />
+              </div>
+
+              <div>
+                <label for="event-date">Date</label>
+                <input id="event-date" name="Date" type="date" required />
+              </div>
+
+              <div>
+                <label for="event-time">Start Time</label>
+                <input id="event-time" name="Start Time" type="time" />
+              </div>
+
+              <div>
+                <label for="venue">Venue</label>
+                <input id="venue" name="Venue" type="text" required placeholder="Hernando Street Theater" />
+              </div>
+
+              <div>
+                <label for="city">City</label>
+                <input id="city" name="City" type="text" required placeholder="Memphis, TN" />
+              </div>
+
+              <div>
+                <label for="event-link">Ticket / Info Link</label>
+                <input id="event-link" name="Event Link" type="url" placeholder="https://example.com/event" />
+              </div>
+
+              <div class="full">
+                <label for="tags">Tags (comma separated)</label>
+                <input id="tags" name="Tags" type="text" placeholder="Blues Revival, Festival, All Ages" />
+              </div>
+
+              <div class="full">
+                <label for="details">Extra Details</label>
+                <textarea id="details" name="Details" placeholder="Anything else we should know about the event."></textarea>
+              </div>
+
+              <div class="full">
+                <label for="contact-email">Your Email</label>
+                <input id="contact-email" name="Contact Email" type="email" required placeholder="you@example.com" />
+              </div>
+
+              <div class="full" style="margin-top:0.2rem;">
+                <button type="submit" class="btn-pill" style="font-size:0.78rem;">
+                  Submit Event for Review
+                </button>
+              </div>
+            </form>
+
+            <p class="sidebar-text" style="margin-top:0.7rem;">
+              After we approve it in our dashboard, it will appear on this calendar in date order.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>© <span id="year"></span> Buzzcrank. All rights reserved.</div>
+        <div class="footer-links">
+          <a href="#events">Events</a>
+          <a href="#bands">Bands</a>
+          <a href="#sponsors">Sponsors</a>
+          <a href="#about">About</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // YEAR
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // MINI PLAYER
+    const audio = document.getElementById('bcAudio');
+    const playBtn = document.getElementById('playToggle');
+    const statusEl = document.getElementById('miniStatus');
+    const heroButton = document.getElementById('heroListenButton');
+
+    function updateButton(isPlaying) {
+      if (!playBtn) return;
+      playBtn.textContent = isPlaying ? '❚❚' : '▶';
+      playBtn.setAttribute('aria-label', isPlaying ? 'Pause stream' : 'Play stream');
+      if (statusEl) {
+        statusEl.textContent = isPlaying ? 'Live · Streaming from Memphis' : 'Tap play to start listening';
+      }
+    }
+
+    if (playBtn && audio) {
+      playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play().then(() => updateButton(true)).catch(() => {
+            if (statusEl) statusEl.textContent = 'Unable to start stream. Check your connection.';
+          });
+        } else {
+          audio.pause();
+          updateButton(false);
+        }
+      });
+    }
+
+    if (heroButton && audio) {
+      heroButton.style.display = 'inline-flex';
+      heroButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (audio.paused) {
+          audio.play().then(() => updateButton(true));
+        } else {
+          audio.pause();
+          updateButton(false);
+        }
+      });
+    }
+
+    // ===== EVENT RENDERING =====
+    const eventsEndpoint = '/.netlify/functions/events';
+
+    // fallback demo events (used until Airtable/Netlify function is wired)
+    const eventsDataFallback = [
+      {
+        title: "Delta Tea & The River Ghosts – Ghosts of Memphis Live",
+        date: "2025-09-12",
+        time: "20:00",
+        venue: "Hernando Street Theater",
+        city: "Memphis, TN",
+        tags: ["Featured", "Blues Revival", "All Ages"],
+        links: [
+          { label: "View details", url: "#" },
+          { label: "Tickets", url: "#" }
+        ]
+      },
+      {
+        title: "Riverfront Revival: Blues, BBQ & Boats",
+        date: "2025-09-13",
+        time: "18:00",
+        venue: "Riverside Park",
+        city: "Memphis, TN · Outdoor",
+        tags: ["Festival", "Food + Music"],
+        links: [
+          { label: "View details", url: "#" }
+        ]
+      }
+    ];
+
+    function formatTime(time24) {
+      if (!time24) return "";
+      const [hStr, mStr] = time24.split(':');
+      let h = parseInt(hStr, 10);
+      const m = mStr || '00';
+      const suffix = h >= 12 ? 'PM' : 'AM';
+      if (h === 0) h = 12;
+      else if (h > 12) h -= 12;
+      return `${h}:${m}${suffix}`;
+    }
+
+    function renderEvents(events) {
+      const list = document.getElementById('eventsList');
+      if (!list) return;
+
+      list.innerHTML = "";
+
+      const sorted = [...events].sort((a, b) => {
+        const ad = new Date(a.date + "T" + (a.time || "00:00"));
+        const bd = new Date(b.date + "T" + (b.time || "00:00"));
+        return ad - bd;
+      });
+
+      sorted.forEach(ev => {
+        const card = document.createElement('article');
+        card.className = 'event-card';
+
+        const dateBox = document.createElement('div');
+        dateBox.className = 'event-date';
+
+        const dateObj = new Date(ev.date + "T00:00");
+        const month = dateObj.toLocaleString('en-US', { month: 'short' }).toUpperCase();
+        const day = String(dateObj.getDate()).padStart(2, '0');
+
+        dateBox.innerHTML = `${month}<br /><strong>${day}</strong>`;
+
+        const main = document.createElement('div');
+        main.className = 'event-main';
+
+        const title = document.createElement('div');
+        title.className = 'event-title';
+        title.textContent = ev.title;
+
+        const meta = document.createElement('div');
+        meta.className = 'event-meta';
+
+        const timeText = ev.time ? formatTime(ev.time) + " · " : "";
+        meta.textContent = `${timeText}${ev.venue} · ${ev.city}`;
+
+        const tagsWrap = document.createElement('div');
+        tagsWrap.className = 'event-tags';
+
+        (ev.tags || []).forEach((tag, idx) => {
+          const span = document.createElement('span');
+          span.className = 'event-tag';
+          if (tag.toLowerCase() === 'featured' || (idx === 0 && tag.toLowerCase().includes('feature'))) {
+            span.classList.add('event-tag--featured');
+          }
+          span.textContent = tag;
+          tagsWrap.appendChild(span);
+        });
+
+        const actions = document.createElement('div');
+        actions.className = 'event-actions';
+
+        (ev.links || []).forEach(link => {
+          const a = document.createElement('a');
+          a.className = 'event-link';
+          a.href = link.url || '#';
+          a.textContent = link.label || 'Details';
+          a.target = (link.url && link.url.startsWith('http')) ? '_blank' : '_self';
+          actions.appendChild(a);
+        });
+
+        main.appendChild(title);
+        main.appendChild(meta);
+        if ((ev.tags || []).length) main.appendChild(tagsWrap);
+        if ((ev.links || []).length) main.appendChild(actions);
+
+        card.appendChild(dateBox);
+        card.appendChild(main);
+        list.appendChild(card);
+      });
+    }
+
+    async function loadEvents() {
+      try {
+        const res = await fetch(eventsEndpoint);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        if (Array.isArray(data) && data.length) {
+          renderEvents(data);
+        } else {
+          renderEvents(eventsDataFallback);
+        }
+      } catch (err) {
+        console.error('Error loading events from Airtable', err);
+        renderEvents(eventsDataFallback);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadEvents);
+  </script>
+</body>
+</html>
