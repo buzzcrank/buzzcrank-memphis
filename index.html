@@ -2,41 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Buzzcrank Memphis — Blues Revival & Events</title>
+  <title>Buzzcrank Memphis – Blues Revival</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="Buzzcrank Memphis is your AI-assisted guide to Memphis blues, soul, rock, and revival. Discover live events, venues, and submit your band."
+    content="Buzzcrank Memphis – your AI-assisted guide to blues, soul, and rock shows in the river city, plus a 24/7 revival radio stream."
   />
 
-  <!-- Basic styling just to make it look good. Adjust however you like. -->
   <style>
     :root {
-      --bg: #050510;
-      --bg-alt: #0b0b1a;
-      --accent: #ffb347;
-      --accent-soft: rgba(255, 179, 71, 0.18);
-      --accent2: #ff4f74;
-      --text: #f7f4ff;
-      --muted: #a0a1c2;
-      --card: #121227;
-      --card-soft: rgba(18, 18, 39, 0.9);
-      --border: rgba(255, 255, 255, 0.06);
+      --bg-main: #050713;
+      --bg-card: #101322;
+      --accent: #ffbf3c;
+      --accent-soft: #ff9a5c;
+      --text-main: #f5f5ff;
+      --text-muted: #a1a4c0;
+      --danger: #ff5b7a;
       --radius-lg: 18px;
-      --radius-xl: 24px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 26px 70px rgba(0, 0, 0, 0.75);
     }
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      padding: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         sans-serif;
-      background: radial-gradient(circle at top left, #28163b 0, #050510 55%);
-      color: var(--text);
+      background: radial-gradient(circle at top, #19152b 0, #050713 58%, #020309 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     a {
@@ -44,616 +44,791 @@
       text-decoration: none;
     }
 
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(
-        to bottom,
-        rgba(5, 5, 16, 0.92),
-        rgba(5, 5, 16, 0.7),
-        transparent
-      );
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-circle {
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #ffe679, #ffb347);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      color: #1a1200;
-      box-shadow: 0 0 30px rgba(255, 179, 71, 0.45);
-    }
-
-    .nav-title {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .nav-title-main {
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-    }
-
-    .nav-title-sub {
-      font-size: 0.7rem;
-      color: var(--muted);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .pill {
-      font-size: 0.7rem;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-    }
-
-    .btn-main {
-      border-radius: 999px;
-      border: none;
-      padding: 8px 16px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #12000c;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 8px 25px rgba(255, 79, 116, 0.45);
-    }
-
-    .btn-main span {
-      font-size: 1.1rem;
-    }
-
     main {
       flex: 1;
     }
 
+    .page-wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 2.25rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 30% 0, #ffe88a 0, #ffbf3c 40%, #ff5a1f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #130b05;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.6);
+    }
+
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+
+    .brand-sub {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-top: 0.05rem;
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    .pill-link {
+      border-radius: var(--radius-pill);
+      padding: 0.45rem 0.95rem;
+      background: rgba(10, 14, 30, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+    }
+
+    .pill-link span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #25f37a;
+      box-shadow: 0 0 9px rgba(68, 255, 153, 0.9);
+    }
+
+    .pill-link:hover {
+      background: rgba(21, 25, 48, 0.98);
+    }
+
+    .top-cta {
+      border-radius: var(--radius-pill);
+      padding: 0.5rem 1rem;
+      background: linear-gradient(120deg, var(--accent-soft), var(--accent));
+      color: #130805;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
+    }
+
+    /* Hero */
+
     .hero {
-      max-width: 1100px;
-      margin: 32px auto 24px;
-      padding: 0 20px;
       display: grid;
       grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
-      gap: 32px;
+      gap: 2.25rem;
+      align-items: center;
+      margin-bottom: 2.4rem;
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2.2rem, 4vw, 2.9rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .hero-left h1 span.highlight {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 34rem;
+      line-height: 1.6;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.7rem;
+      font-size: 0.74rem;
+    }
+
+    .badge {
+      border-radius: var(--radius-pill);
+      padding: 0.25rem 0.7rem;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(5, 6, 16, 0.7);
+      color: var(--text-muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      align-items: center;
+    }
+
+    .hero-primary {
+      border-radius: var(--radius-pill);
+      padding: 0.7rem 1.5rem;
+      background: #fff;
+      color: #050713;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-secondary {
+      border-radius: var(--radius-pill);
+      padding: 0.6rem 1.25rem;
+      background: rgba(14, 14, 24, 0.9);
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+    }
+
+    .hero-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+
+    .hero-right {
+      justify-self: stretch;
+    }
+
+    /* Now streaming pill */
+
+    .now-streaming {
+      margin-top: 0.75rem;
+    }
+
+    .stream-pill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 1rem 1.75rem;
+      border-radius: var(--radius-pill);
+      background: radial-gradient(circle at top left, #ffbf3c 0, #2b132f 45%, #060814 100%);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75);
+      max-width: 620px;
+    }
+
+    .stream-info {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #ffe79f;
+      margin: 0 0 0.15rem;
+    }
+
+    .stream-title {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .stream-tagline {
+      margin: 0.1rem 0 0;
+      font-size: 0.8rem;
+      opacity: 0.88;
+    }
+
+    .stream-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .icon-button {
+      border: none;
+      outline: none;
+      background: rgba(0, 0, 0, 0.35);
+      color: #fff;
+      border-radius: 999px;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .icon-button:hover {
+      background: rgba(0, 0, 0, 0.55);
+    }
+
+    .mini-volume {
+      width: 80px;
+    }
+
+    /* Little animated bars */
+
+    .mini-visualizer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 2px;
+      width: 30px;
+      height: 16px;
+    }
+
+    .mini-visualizer span {
+      flex: 1;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.35);
+      transform-origin: bottom;
+      animation: miniBar 1s ease-in-out infinite;
+      animation-play-state: paused;
+    }
+
+    .mini-visualizer.playing span {
+      animation-play-state: running;
+    }
+
+    .mini-visualizer span:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .mini-visualizer span:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .mini-visualizer span:nth-child(4) {
+      animation-delay: 0.45s;
+    }
+
+    @keyframes miniBar {
+      0% {
+        height: 4px;
+      }
+      50% {
+        height: 14px;
+      }
+      100% {
+        height: 4px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mini-visualizer span {
+        animation: none;
+      }
+    }
+
+    /* Events section */
+
+    .section-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title-row h2 {
+      font-size: 1.2rem;
+    }
+
+    .section-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .events-shell {
+      margin-top: 1.2rem;
+      padding: 1.2rem 1rem 1rem;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(130deg, rgba(11, 15, 35, 0.96), rgba(6, 10, 26, 0.96));
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .events-status {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .events-status span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #32ff9b;
+      box-shadow: 0 0 8px rgba(72, 255, 173, 0.85);
+    }
+
+    ul.event-list {
+      list-style: none;
+      margin-top: 0.25rem;
+    }
+
+    .event-item {
+      display: grid;
+      grid-template-columns: 1.6fr 1.1fr auto;
+      gap: 0.75rem;
+      align-items: center;
+      padding: 0.65rem 0.6rem;
+      border-radius: 10px;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .event-item + .event-item {
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .event-item:hover {
+      background: radial-gradient(circle at top left, rgba(255, 191, 60, 0.14), rgba(10, 13, 30, 0.96));
+      transform: translateY(-1px);
+    }
+
+    .event-main-title {
+      font-size: 0.9rem;
+      margin-bottom: 0.1rem;
+    }
+
+    .event-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .event-when {
+      font-size: 0.8rem;
+    }
+
+    .event-tags {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .event-link-btn {
+      border-radius: var(--radius-pill);
+      padding: 0.35rem 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(3, 7, 18, 0.85);
+      color: var(--text-main);
+      font-size: 0.75rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    footer {
+      padding: 0.8rem 1.25rem 1.3rem;
+      font-size: 0.75rem;
+      color: #65688b;
+      text-align: center;
     }
 
     @media (max-width: 840px) {
       .hero {
         grid-template-columns: minmax(0, 1fr);
       }
-    }
 
-    .hero-left h1 {
-      font-size: clamp(2.5rem, 4vw, 3.3rem);
-      line-height: 1.02;
-      margin: 0 0 12px;
-    }
-
-    .hero-left h1 span.highlight {
-      color: var(--accent);
-      text-shadow: 0 0 22px rgba(255, 179, 71, 0.7);
-    }
-
-    .hero-tagline {
-      font-size: 0.98rem;
-      line-height: 1.6;
-      color: var(--muted);
-      max-width: 36rem;
-      margin-bottom: 16px;
-    }
-
-    .hero-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 14px 0 22px;
-    }
-
-    .chip {
-      padding: 4px 10px;
-      font-size: 0.75rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-
-    .chip.hot {
-      background: var(--accent-soft);
-      border-color: rgba(255, 179, 71, 0.35);
-      color: var(--accent);
-    }
-
-    .hero-cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .btn-secondary {
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      padding: 8px 14px;
-      font-size: 0.8rem;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .micro-copy {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    .hero-right {
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--border);
-      background: radial-gradient(circle at top, #30194f, #0b0b1a);
-      padding: 18px 18px 16px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-    }
-
-    .hero-right-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .hero-right-title {
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-    }
-
-    .player-pill {
-      border-radius: 999px;
-      padding: 4px 10px;
-      background: rgba(5, 5, 16, 0.7);
-      font-size: 0.72rem;
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .player-pill-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #28ff9f;
-      box-shadow: 0 0 10px rgba(40, 255, 159, 0.9);
-    }
-
-    .mini-player-frame {
-      margin-top: 8px;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      background: rgba(0, 0, 0, 0.5);
-      min-height: 110px;
-      display: flex;
-      align-items: stretch;
-    }
-
-    .mini-player-inner {
-      flex: 1;
-      border: none;
-      width: 100%;
-      min-height: 110px;
-    }
-
-    .player-footer {
-      margin-top: 10px;
-      font-size: 0.7rem;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .events-section {
-      max-width: 1100px;
-      margin: 6px auto 40px;
-      padding: 0 20px 30px;
-    }
-
-    .events-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
-    }
-
-    .events-header h2 {
-      margin: 0;
-      font-size: 1.05rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .events-subtitle {
-      margin: 0;
-      font-size: 0.76rem;
-      color: var(--muted);
-    }
-
-    .events-feed {
-      margin-top: 10px;
-      border-radius: var(--radius-lg);
-      background: var(--card-soft);
-      border: 1px solid var(--border);
-      padding: 14px 14px 10px;
-      min-height: 72px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .events-loading,
-    .events-empty,
-    .events-error {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .events-error {
-      color: #ff8ba7;
-    }
-
-    .event-card {
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      background: rgba(5, 5, 16, 0.7);
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      gap: 4px 14px;
-      align-items: start;
-      font-size: 0.86rem;
-    }
-
-    @media (max-width: 720px) {
-      .event-card {
-        grid-template-columns: minmax(0, 1fr);
+      .hero-right {
+        order: -1;
       }
     }
 
-    .event-title {
-      margin: 0;
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-    .event-meta,
-    .event-venue {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
+      .top-nav {
+        align-self: stretch;
+        justify-content: space-between;
+      }
 
-    .event-meta {
-      margin-top: 2px;
-    }
+      .stream-pill {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-    .event-venue {
-      margin-top: 3px;
-    }
+      .event-item {
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+      }
 
-    .event-tags {
-      margin: 0;
-      margin-top: 6px;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 2px 6px;
-      margin-right: 4px;
-      margin-bottom: 2px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--muted);
-      font-size: 0.7rem;
-    }
-
-    .event-links {
-      margin: 0;
-      margin-top: 4px;
-      text-align: right;
-      font-size: 0.8rem;
-    }
-
-    .event-links a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .event-links a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      max-width: 1100px;
-      margin: 0 auto 26px;
-      padding: 0 20px;
-      border-top: 1px solid var(--border);
-      padding-top: 10px;
-      font-size: 0.78rem;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    footer a {
-      color: var(--accent);
+      .event-link-btn {
+        justify-self: flex-start;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="page">
-    <header>
-      <div class="nav">
-        <div class="nav-left">
-          <div class="logo-circle">BC</div>
-          <div class="nav-title">
-            <span class="nav-title-main">Buzzcrank</span>
-            <span class="nav-title-sub">Memphis · Blues · Revival</span>
+  <main>
+    <div class="page-wrap">
+      <header>
+        <div class="brand">
+          <div class="brand-mark">BC</div>
+          <div>
+            <div class="brand-title">Buzzcrank Memphis</div>
+            <div class="brand-sub">Blues • Soul • Rock • Revival</div>
           </div>
         </div>
 
-        <div class="nav-right">
-          <div class="pill">Local · Indie · Emerging</div>
-          <a href="#submit-band" class="btn-main">
-            <span>⬤</span> Submit your band
-          </a>
-        </div>
-      </div>
-    </header>
+        <nav class="top-nav">
+          <button
+            class="pill-link"
+            onclick="window.location.href='#events'"
+            type="button"
+          >
+            <span class="dot"></span>
+            <span>Upcoming shows</span>
+          </button>
 
-    <main>
-      <!-- HERO -->
+          <button
+            class="top-cta"
+            type="button"
+            onclick="window.open('https://comfy-meerkat-e400e1.netlify.app/buzzcrank-revival-live.html','_blank')"
+          >
+            Open full player
+          </button>
+        </nav>
+      </header>
+
       <section class="hero">
         <div class="hero-left">
           <h1>
             Soundtrack the
-            <span class="highlight">Memphis Revival</span>.
+            <span class="highlight">Memphis Revival.</span>
           </h1>
-          <p class="hero-tagline">
-            Buzzcrank Memphis is your AI-assisted guide to what’s happening in
-            the city—live music, venues, and a 24/7 blues-and-beyond stream that
-            actually plays the locals.
+          <p class="hero-sub">
+            Buzzcrank Memphis is your AI-assisted guide to what’s happening
+            in the city — live music, venues, and a 24/7 blues-and-beyond
+            station that actually plays the locals.
           </p>
 
-          <div class="hero-chips">
-            <span class="chip hot">Delta blues revival</span>
-            <span class="chip">Soul · rock · gospel</span>
-            <span class="chip">Indie &amp; up-and-coming artists</span>
+          <div class="hero-badges">
+            <span class="badge">Live internet radio</span>
+            <span class="badge">Delta blues • Soul • Rock</span>
+            <span class="badge">Indie &amp; emerging artists</span>
           </div>
 
-          <div class="hero-cta-row">
-            <a href="#events" class="btn-secondary">
-              🎟 Browse upcoming shows
-            </a>
-            <a href="#submit-band" class="btn-secondary">
-              🎤 Submit your band
-            </a>
+          <div class="hero-actions">
+            <button
+              class="hero-primary"
+              onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})"
+              type="button"
+            >
+              Browse Upcoming Shows
+            </button>
+
+            <button
+              class="hero-secondary"
+              onclick="window.location.href='admin.html'"
+              type="button"
+            >
+              Submit Your Band
+            </button>
           </div>
 
-          <p class="micro-copy">
-            Venues &amp; artists: we’ll be opening local sponsor slots and
-            featured placements soon.
+          <p class="hero-note">
+            Local artists, venues, and sponsors can all plug in here — Buzzcrank is built to be the station
+            Memphis shares.
           </p>
         </div>
 
-        <!-- RIGHT: MINI PLAYER EMBED -->
         <div class="hero-right">
-          <div class="hero-right-header">
-            <div class="hero-right-title">Buzzcrank Revival Live</div>
-            <div class="player-pill">
-              <span class="player-pill-dot"></span>
-              Streaming now
+          <!-- NOW STREAMING MINI PLAYER -->
+          <section id="now-streaming" class="now-streaming">
+            <div class="stream-pill">
+              <div class="stream-info">
+                <p class="eyebrow">NOW STREAMING</p>
+                <h3 class="stream-title">Buzzcrank Revival Live</h3>
+                <p class="stream-tagline">
+                  Delta blues, soul, and rock from the river city.
+                </p>
+              </div>
+
+              <div class="stream-controls">
+                <!-- Hidden audio element -->
+                <audio id="miniAudio" preload="none"></audio>
+
+                <!-- Play / pause -->
+                <button
+                  id="miniPlayPause"
+                  class="icon-button"
+                  type="button"
+                  aria-label="Play stream"
+                >
+                  ▶
+                </button>
+
+                <!-- Simple “visualizer” -->
+                <div
+                  id="miniVisualizer"
+                  class="mini-visualizer"
+                  aria-hidden="true"
+                >
+                  <span></span><span></span><span></span><span></span>
+                </div>
+
+                <!-- Volume -->
+                <input
+                  id="miniVolume"
+                  class="mini-volume"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value="0.8"
+                  aria-label="Volume"
+                />
+
+                <!-- Mute -->
+                <button
+                  id="miniMute"
+                  class="icon-button"
+                  type="button"
+                  aria-label="Mute"
+                >
+                  🔈
+                </button>
+
+                <!-- Pop-out to full player -->
+                <button
+                  id="miniPopout"
+                  class="icon-button"
+                  type="button"
+                  aria-label="Open full player"
+                >
+                  ↗
+                </button>
+              </div>
             </div>
-          </div>
-
-          <div class="mini-player-frame">
-            <!-- This is your existing Netlify player page -->
-            <iframe
-              class="mini-player-inner"
-              src="https://comfy-meerkat-e400e1.netlify.app/buzzcrank-revival-live.html"
-              title="Buzzcrank Revival Live Player"
-              loading="lazy"
-            ></iframe>
-          </div>
-
-          <div class="player-footer">
-            <span>Memphis-built, internet-wide.</span>
-            <span>Delta Tea &amp; The River Ghosts · local &amp; AI-native artists</span>
-          </div>
+          </section>
         </div>
       </section>
 
-      <!-- EVENTS -->
-      <section class="events-section" id="events">
-        <div class="events-header">
+      <!-- EVENTS SECTION -->
+      <section id="events">
+        <div class="section-label">Pulled live from Airtable</div>
+
+        <div class="section-title-row">
           <h2>Upcoming shows &amp; events</h2>
-          <p class="events-subtitle">
-            Pulled live from the Buzzcrank Memphis Airtable event feed.
+          <p class="section-sub">
+            Memphis-first listings for the Buzzcrank Memphis event feed.
           </p>
         </div>
 
-        <div id="events-feed" class="events-feed">
-          <p class="events-loading">Loading events from Airtable…</p>
+        <div class="events-shell">
+          <div class="events-status" id="eventsStatus">
+            <span class="dot"></span>
+            <span>Loading events from Airtable…</span>
+          </div>
+          <ul id="eventsList" class="event-list"></ul>
         </div>
       </section>
+    </div>
+  </main>
 
-      <!-- Simple anchor for your future submit-band/admin pages -->
-      <section id="submit-band"></section>
-    </main>
+  <footer>
+    Buzzcrank Memphis • Built for blues, soul, and the river city’s next wave.
+  </footer>
 
-    <footer>
-      <span>© <span id="year"></span> Buzzcrank · Memphis Blues Revival.</span>
-      <span>
-        Admin: protected dashboard will live at <code>/admin.html</code>.
-      </span>
-    </footer>
-  </div>
-
-  <!-- Small script for current year -->
+  <!-- JS: events loader + mini-player -->
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+    // === EVENT LIST FROM NETLIFY FUNCTION ===
+    (async function loadEvents() {
+      const statusEl = document.getElementById("eventsStatus");
+      const listEl = document.getElementById("eventsList");
 
-  <!-- EVENTS LOADER SCRIPT: talks to /.netlify/functions/events -->
-  <script>
-    async function loadBuzzcrankEvents() {
-      const feed = document.getElementById("events-feed");
-      if (!feed) {
-        console.warn("Buzzcrank: #events-feed not found.");
-        return;
-      }
-
-      feed.innerHTML =
-        '<p class="events-loading">Loading events from Airtable…</p>';
+      if (!statusEl || !listEl) return;
 
       try {
-        const res = await fetch("/.netlify/functions/events", {
-          headers: { Accept: "application/json" },
-        });
+        const res = await fetch("/.netlify/functions/events");
+        if (!res.ok) throw new Error("Network response not ok");
 
-        if (!res.ok) {
-          throw new Error("HTTP " + res.status + " " + res.statusText);
-        }
+        const data = await res.json();
 
-        const events = await res.json();
-        console.log("Buzzcrank events:", events);
-
-        if (!Array.isArray(events) || events.length === 0) {
-          feed.innerHTML =
-            '<p class="events-empty">No events on the calendar yet. If you’re a venue or band with a date on the books, hit the submit link and we’ll add it.</p>';
+        if (!Array.isArray(data) || data.length === 0) {
+          statusEl.innerHTML =
+            '<span class="dot"></span><span>No events in the calendar yet — submit your show to get listed.</span>';
+          listEl.innerHTML = "";
           return;
         }
 
-        const html = events
-          .map((ev) => {
-            const title = ev.title || "Show";
-            const date = ev.date || "";
-            const time = ev.time || "";
-            const venue = ev.venue || "";
-            const city = ev.city || "";
+        statusEl.innerHTML =
+          '<span class="dot"></span><span>Live feed synced. Here’s what’s coming up.</span>';
 
-            const meta = [date, time].filter(Boolean).join(" · ");
-            const place = [venue, city].filter(Boolean).join(" – ");
+        listEl.innerHTML = "";
+        data.forEach((ev) => {
+          const li = document.createElement("li");
+          li.className = "event-item";
 
-            const tags =
-              Array.isArray(ev.tags) && ev.tags.length
-                ? `<p class="event-tags">${ev.tags
-                    .map((t) => `<span class="tag">${t}</span>`)
-                    .join(" ")}</p>`
-                : "";
+          const title = ev.title || "Untitled event";
+          const date = ev.date || "";
+          const time = ev.time || "";
+          const venue = ev.venue || "";
+          const city = ev.city || "";
+          const tags = Array.isArray(ev.tags) ? ev.tags : [];
+          const links = Array.isArray(ev.links) ? ev.links : [];
 
-            const links =
-              Array.isArray(ev.links) && ev.links.length
-                ? `<p class="event-links">${ev.links
-                    .map(
-                      (l) =>
-                        `<a href="${l.url}" target="_blank" rel="noopener">${
-                          l.label || "Details"
-                        }</a>`
-                    )
-                    .join(" · ")}</p>`
-                : "";
+          const mainCol = document.createElement("div");
+          const whenCol = document.createElement("div");
+          const ctaCol = document.createElement("div");
 
-            return `
-              <article class="event-card">
-                <div>
-                  <h3 class="event-title">${title}</h3>
-                  ${
-                    meta
-                      ? `<p class="event-meta">${meta}</p>`
-                      : ""
-                  }
-                  ${
-                    place
-                      ? `<p class="event-venue">${place}</p>`
-                      : ""
-                  }
-                  ${tags}
-                </div>
-                <div>
-                  ${links}
-                </div>
-              </article>
-            `;
-          })
-          .join("");
+          // Left: title + venue/city + tags
+          mainCol.innerHTML = `
+            <div class="event-main-title">${title}</div>
+            <div class="event-meta">
+              ${venue ? venue : ""}${venue && city ? " • " : ""}${city ? city : ""}
+            </div>
+            ${
+              tags.length
+                ? `<div class="event-tags">${tags
+                    .map((t) => "#" + t)
+                    .join("  ")}</div>`
+                : ""
+            }
+          `;
 
-        feed.innerHTML = html;
+          // Middle: date & time
+          whenCol.innerHTML = `
+            <div class="event-when">${date}</div>
+            <div class="event-meta">${time}</div>
+          `;
+
+          // Right: link button (if present)
+          if (links.length > 0 && links[0].url) {
+            const btn = document.createElement("button");
+            btn.className = "event-link-btn";
+            btn.type = "button";
+            btn.textContent = links[0].label || "View details";
+            btn.addEventListener("click", () => {
+              window.open(links[0].url, "_blank");
+            });
+            ctaCol.appendChild(btn);
+          }
+
+          li.appendChild(mainCol);
+          li.appendChild(whenCol);
+          li.appendChild(ctaCol);
+          listEl.appendChild(li);
+        });
       } catch (err) {
-        console.error("Buzzcrank: failed to load events", err);
-        feed.innerHTML =
-          '<p class="events-error">Couldn’t load events right now. Please try again in a bit.</p>';
+        console.error("Failed to load events", err);
+        statusEl.innerHTML =
+          '<span class="dot" style="background:' +
+          "#ff5b7a" +
+          '; box-shadow:none;"></span><span>Couldn’t reach the event feed. Try refreshing in a moment.</span>';
       }
-    }
+    })();
 
-    document.addEventListener("DOMContentLoaded", loadBuzzcrankEvents);
+    // === MINI PLAYER ===
+    (function () {
+      // Live365 stream URL
+      const STREAM_URL = "https://streaming.live365.com/a26834";
+
+      const audio = document.getElementById("miniAudio");
+      const playPauseBtn = document.getElementById("miniPlayPause");
+      const muteBtn = document.getElementById("miniMute");
+      const volSlider = document.getElementById("miniVolume");
+      const visualizer = document.getElementById("miniVisualizer");
+      const popoutBtn = document.getElementById("miniPopout");
+
+      if (!audio || !playPauseBtn) return;
+
+      audio.src = STREAM_URL;
+      audio.volume = parseFloat(volSlider.value || "0.8");
+      let isPlaying = false;
+
+      function setPlayingState(playing) {
+        isPlaying = playing;
+        playPauseBtn.textContent = playing ? "⏸" : "▶";
+        playPauseBtn.setAttribute(
+          "aria-label",
+          playing ? "Pause stream" : "Play stream"
+        );
+        if (playing) {
+          visualizer.classList.add("playing");
+        } else {
+          visualizer.classList.remove("playing");
+        }
+      }
+
+      playPauseBtn.addEventListener("click", () => {
+        if (!isPlaying) {
+          audio
+            .play()
+            .then(() => setPlayingState(true))
+            .catch((err) => {
+              console.error("Mini player play() failed", err);
+            });
+        } else {
+          audio.pause();
+          setPlayingState(false);
+        }
+      });
+
+      volSlider.addEventListener("input", () => {
+        const v = parseFloat(volSlider.value);
+        audio.volume = v;
+        if (v === 0 || audio.muted) {
+          muteBtn.textContent = "🔇";
+        } else {
+          muteBtn.textContent = "🔈";
+        }
+      });
+
+      muteBtn.addEventListener("click", () => {
+        audio.muted = !audio.muted;
+        muteBtn.textContent = audio.muted ? "🔇" : "🔈";
+      });
+
+      audio.addEventListener("ended", () => setPlayingState(false));
+
+      popoutBtn.addEventListener("click", () => {
+        window.open(
+          "https://comfy-meerkat-e400e1.netlify.app/buzzcrank-revival-live.html",
+          "_blank"
+        );
+      });
+    })();
   </script>
 </body>
 </html>
