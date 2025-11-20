@@ -51,33 +51,39 @@
     .page-wrap {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 1.5rem 1.25rem 3rem;
+      padding: 0 1.25rem 3rem;
     }
 
-    /* HEADER */
+    /* HEADER ROW */
 
-    header.main-header {
+    .site-head {
       display: flex;
       align-items: center;
-      gap: 1.5rem;
-      margin-bottom: 1.75rem;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1.75rem;
+      padding: 1.2rem 0 1.6rem;
+      min-height: 140px; /* ~1.5 inches at 96dpi */
     }
 
-    .brand {
+    .head-left {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      flex-shrink: 0;
+      gap: 0.9rem;
+      min-width: 0;
     }
 
     .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      object-fit: cover;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.6);
-      flex-shrink: 0;
+      width: 150px;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+    }
+
+    .brand-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
     }
 
     .brand-title {
@@ -95,11 +101,13 @@
       margin-top: 0.05rem;
     }
 
-    .header-player {
-      flex: 1;
-      min-width: 0;
+    .head-right {
       display: flex;
-      justify-content: center;
+      align-items: center;
+      gap: 1.25rem;
+      min-width: 0;
+      flex: 1;
+      justify-content: flex-end;
     }
 
     .top-nav {
@@ -107,7 +115,6 @@
       align-items: center;
       gap: 0.75rem;
       font-size: 0.8rem;
-      flex-shrink: 0;
     }
 
     .pill-link {
@@ -119,6 +126,7 @@
       align-items: center;
       gap: 0.45rem;
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .pill-link span.dot {
@@ -135,72 +143,32 @@
 
     .top-cta {
       border-radius: var(--radius-pill);
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1.2rem;
       background: linear-gradient(120deg, var(--accent-soft), var(--accent));
       color: #130805;
       font-weight: 600;
       border: none;
       cursor: pointer;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
-    }
-
-    /* CTA band under header */
-
-    .cta-band {
-      margin-bottom: 1.8rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      align-items: center;
-    }
-
-    .hero-primary {
-      border-radius: var(--radius-pill);
-      padding: 0.7rem 1.5rem;
-      background: #fff;
-      color: #050713;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .hero-secondary {
-      border-radius: var(--radius-pill);
-      padding: 0.6rem 1.25rem;
-      background: rgba(14, 14, 24, 0.9);
-      color: var(--text-main);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      cursor: pointer;
-    }
-
-    .hero-note {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 0.4rem;
+      white-space: nowrap;
     }
 
     /* NOW STREAMING MINI PLAYER */
 
     .now-streaming {
-      margin-top: 0;
-      width: 100%;
+      flex: 0 1 520px;
+      max-width: 520px;
     }
 
     .stream-pill {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
-      padding: 1rem 1.75rem;
+      gap: 1.3rem;
+      padding: 1rem 1.5rem;
       border-radius: var(--radius-pill);
       background: radial-gradient(circle at top left, #ffbf3c 0, #2b132f 45%, #060814 100%);
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75);
-      max-width: 620px;
-      width: 100%;
     }
 
     .stream-info {
@@ -219,12 +187,18 @@
     .stream-title {
       margin: 0;
       font-size: 1.05rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .stream-tagline {
       margin: 0.1rem 0 0.4rem;
       font-size: 0.8rem;
       opacity: 0.88;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .nowplaying-row {
@@ -341,15 +315,9 @@
     }
 
     @keyframes miniBar {
-      0% {
-        height: 4px;
-      }
-      50% {
-        height: 14px;
-      }
-      100% {
-        height: 4px;
-      }
+      0% { height: 4px; }
+      50% { height: 14px; }
+      100% { height: 4px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -358,7 +326,7 @@
       }
     }
 
-    /* EVENTS / BLOG SECTIONS (unchanged) */
+    /* SECTIONS / EVENTS / BLOG */
 
     .section-label {
       font-size: 0.8rem;
@@ -386,7 +354,8 @@
       color: var(--text-muted);
     }
 
-    .events-shell {
+    .events-shell,
+    .blog-shell {
       margin-top: 1.2rem;
       padding: 1.2rem 1rem 1rem;
       border-radius: var(--radius-lg);
@@ -395,7 +364,8 @@
       border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .events-status {
+    .events-status,
+    .blog-status {
       font-size: 0.8rem;
       color: var(--text-muted);
       margin-bottom: 0.7rem;
@@ -404,12 +374,14 @@
       gap: 0.5rem;
     }
 
-    .events-status span.dot {
+    .events-status span.dot,
+    .blog-status span.dot {
       width: 7px;
       height: 7px;
       border-radius: 999px;
       background: #32ff9b;
       box-shadow: 0 0 8px rgba(72, 255, 173, 0.85);
+      flex-shrink: 0;
     }
 
     ul.event-list {
@@ -467,55 +439,21 @@
       white-space: nowrap;
     }
 
-    footer {
-      padding: 0.8rem 1.25rem 1.3rem;
-      font-size: 0.75rem;
-      color: #65688b;
-      text-align: center;
-    }
-
-    /* BLOG CARDS */
-
-    .blog-shell {
-      margin-top: 1.2rem;
-      padding: 1.2rem 1rem 1.1rem;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, rgba(9, 12, 26, 0.96), rgba(6, 10, 22, 0.96));
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .blog-status {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .blog-status span.dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #ffbf3c;
-      box-shadow: 0 0 6px rgba(255, 191, 60, 0.9);
-    }
-
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.9rem;
+      gap: 1rem;
     }
 
     .blog-card {
+      background: rgba(3, 7, 18, 0.9);
       border-radius: 14px;
-      padding: 0.8rem 0.85rem 0.9rem;
-      background: radial-gradient(circle at top left, rgba(255, 191, 60, 0.16), rgba(10, 13, 30, 0.96));
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 0.9rem 0.9rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       flex-direction: column;
-      min-height: 140px;
+      justify-content: space-between;
+      min-height: 150px;
     }
 
     .blog-title {
@@ -531,51 +469,45 @@
 
     .blog-excerpt {
       font-size: 0.78rem;
-      color: #d1d3f3;
-      flex: 1;
+      color: #c5c7e5;
+      line-height: 1.4;
+      margin-bottom: 0.45rem;
     }
 
-    .blog-card-footer {
-      margin-top: 0.6rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .blog-readmore {
+      font-size: 0.78rem;
+      color: var(--accent-soft);
+      font-weight: 500;
+    }
+
+    footer {
+      padding: 0.8rem 1.25rem 1.3rem;
       font-size: 0.75rem;
+      color: #65688b;
+      text-align: center;
     }
 
-    .blog-link {
-      border-radius: 999px;
-      padding: 0.32rem 0.75rem;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(3, 7, 18, 0.85);
-      cursor: pointer;
-    }
-
-    @media (max-width: 840px) {
-      .blog-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      header.main-header {
+    @media (max-width: 960px) {
+      .site-head {
         flex-direction: column;
         align-items: flex-start;
       }
 
-      .top-nav {
+      .head-right {
         align-self: stretch;
         justify-content: space-between;
         flex-wrap: wrap;
       }
 
-      .header-player {
-        width: 100%;
+      .now-streaming {
+        flex: 1 1 100%;
+        max-width: 100%;
       }
+    }
 
-      .stream-pill {
-        flex-direction: column;
-        align-items: flex-start;
+    @media (max-width: 720px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
       }
 
       .event-item {
@@ -586,10 +518,6 @@
       .event-link-btn {
         justify-self: flex-start;
       }
-
-      .blog-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
     }
   </style>
 </head>
@@ -597,22 +525,49 @@
 <body>
   <main>
     <div class="page-wrap">
-      <!-- HEADER ROW: brand + mini player + nav -->
-      <header class="main-header">
-        <div class="brand">
+      <!-- HEADER ROW: logo + text + mini-player + nav -->
+      <header class="site-head">
+        <div class="head-left">
           <img
-            class="brand-logo"
             src="https://blogger.googleusercontent.com/img/a/AVvXsEg1kkIexWCkWc4UwcypDMQ7gTxd1CipMcv7c4KAWbCwy5UOq4VWJtxbh7Dan86Qv9blO_pU-SSZKDX7EGc-hM2sj_rgAmtfoL4l1g_8pA82P7aOG8j6OR4kEQTSAbR82OvCRAMAiZVz1sna47wmWXqJrRu_06ILfThnjgP1x3EiM4jPQv-tON2qSVyVhtI=s655"
             alt="Buzzcrank Memphis logo"
+            class="brand-logo"
           />
-          <div>
-            <div class="brand-title">Buzzcrank Memphis</div>
-            <div class="brand-sub">Blues • Soul • Rock • Revival</div>
+          <div class="brand-text-block">
+            <div class="brand-title">BUZZCRANK MEMPHIS</div>
+            <div class="brand-sub">BLUES • SOUL • ROCK • REVIVAL</div>
           </div>
         </div>
 
-        <div class="header-player">
-          <!-- NOW STREAMING MINI PLAYER -->
+        <div class="head-right">
+          <nav class="top-nav">
+            <button
+              class="pill-link"
+              onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})"
+              type="button"
+            >
+              <span class="dot"></span>
+              <span>Upcoming shows</span>
+            </button>
+
+            <button
+              class="pill-link"
+              onclick="window.open('http://www.buzzcrank.blogspot.com/','_blank')"
+              type="button"
+            >
+              <span>Buzzcrank Blog</span>
+            </button>
+
+            <button
+              class="top-cta"
+              type="button"
+              onclick="window.open('https://comfy-meerkat-e400e1.netlify.app/buzzcrank-revival-live.html','_blank')"
+            >
+              Open full player
+            </button>
+          </nav>
+
+          <!-- MINI PLAYER -->
           <section id="now-streaming" class="now-streaming">
             <div class="stream-pill">
               <div class="stream-info">
@@ -639,8 +594,10 @@
               </div>
 
               <div class="stream-controls">
+                <!-- Hidden audio element -->
                 <audio id="miniAudio" preload="none"></audio>
 
+                <!-- Play / pause -->
                 <button
                   id="miniPlayPause"
                   class="icon-button"
@@ -650,6 +607,7 @@
                   ▶
                 </button>
 
+                <!-- Simple “visualizer” -->
                 <div
                   id="miniVisualizer"
                   class="mini-visualizer"
@@ -658,6 +616,7 @@
                   <span></span><span></span><span></span><span></span>
                 </div>
 
+                <!-- Volume -->
                 <input
                   id="miniVolume"
                   class="mini-volume"
@@ -669,6 +628,7 @@
                   aria-label="Volume"
                 />
 
+                <!-- Mute -->
                 <button
                   id="miniMute"
                   class="icon-button"
@@ -678,6 +638,7 @@
                   🔈
                 </button>
 
+                <!-- Pop-out to full player -->
                 <button
                   id="miniPopout"
                   class="icon-button"
@@ -690,60 +651,7 @@
             </div>
           </section>
         </div>
-
-        <nav class="top-nav">
-          <button
-            class="pill-link"
-            onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})"
-            type="button"
-          >
-            <span class="dot"></span>
-            <span>Upcoming shows</span>
-          </button>
-
-          <button
-            class="pill-link"
-            type="button"
-            onclick="window.open('https://buzzcrank.blogspot.com','_blank')"
-          >
-            <span>Buzzcrank Blog</span>
-          </button>
-
-          <button
-            class="top-cta"
-            type="button"
-            onclick="window.open('https://comfy-meerkat-e400e1.netlify.app/buzzcrank-revival-live.html','_blank')"
-          >
-            Open full player
-          </button>
-        </nav>
       </header>
-
-      <!-- CTA band (yellow section top) -->
-      <section class="cta-band">
-        <div class="hero-actions">
-          <button
-            class="hero-primary"
-            onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})"
-            type="button"
-          >
-            Browse Upcoming Shows
-          </button>
-
-          <button
-            class="hero-secondary"
-            onclick="window.location.href='admin.html'"
-            type="button"
-          >
-            Submit Your Band
-          </button>
-        </div>
-
-        <p class="hero-note">
-          Local artists, venues, and sponsors can all plug in here — Buzzcrank is built to be the station Memphis
-          shares.
-        </p>
-      </section>
 
       <!-- EVENTS SECTION -->
       <section id="events">
@@ -766,8 +674,8 @@
       </section>
 
       <!-- BLOG SECTION -->
-      <section id="blog">
-        <div class="section-label">From the Buzzcrank blog</div>
+      <section id="blog" style="margin-top: 2.4rem;">
+        <div class="section-label">From the Buzzcrank Blog</div>
 
         <div class="section-title-row">
           <h2>Stories, recaps &amp; river city rants</h2>
@@ -779,15 +687,9 @@
         <div class="blog-shell">
           <div class="blog-status" id="blogStatus">
             <span class="dot"></span>
-            <span>Loading latest posts…</span>
+            <span>Loading latest posts from buzzcrank.blogspot.com…</span>
           </div>
-
-          <div id="blogGrid" class="blog-grid"></div>
-
-          <div style="margin-top:0.9rem; font-size:0.78rem; color:var(--text-muted);">
-            Can’t see the feed? You can always browse directly on
-            <a href="https://buzzcrank.blogspot.com" target="_blank" rel="noopener">buzzcrank.blogspot.com</a>.
-          </div>
+          <div id="blogList" class="blog-grid"></div>
         </div>
       </section>
     </div>
@@ -797,7 +699,7 @@
     Buzzcrank Memphis • Built for blues, soul, and the river city’s next wave.
   </footer>
 
-  <!-- JS: events loader + mini-player + now playing metadata + Blogger feed -->
+  <!-- JS: events loader + mini-player + now playing metadata + blog loader -->
   <script>
     // === EVENT LIST FROM NETLIFY FUNCTION ===
     (async function loadEvents() {
@@ -846,7 +748,9 @@
             </div>
             ${
               tags.length
-                ? `<div class="event-tags">${tags.map((t) => "#" + t).join("  ")}</div>`
+                ? `<div class="event-tags">${tags
+                    .map((t) => "#" + t)
+                    .join("  ")}</div>`
                 : ""
             }
           `;
@@ -991,56 +895,64 @@
       setInterval(loadNowPlaying, 30000);
     })();
 
-    // === BLOGGER FEED LOADER ===
+    // === BLOG LOADER FROM NETLIFY FUNCTION ===
     (async function loadBlog() {
       const statusEl = document.getElementById("blogStatus");
-      const gridEl = document.getElementById("blogGrid");
-      if (!statusEl || !gridEl) return;
+      const listEl = document.getElementById("blogList");
+      if (!statusEl || !listEl) return;
 
       try {
-        const res = await fetch("/.netlify/functions/blogger");
+        const res = await fetch("/.netlify/functions/blog");
         if (!res.ok) throw new Error("HTTP " + res.status);
-        const posts = await res.json();
+
+        const data = await res.json();
+        const posts = Array.isArray(data.posts) ? data.posts : data;
 
         if (!Array.isArray(posts) || posts.length === 0) {
           statusEl.innerHTML =
-            '<span class="dot"></span><span>No posts found yet. First rants are still brewing.</span>';
+            '<span class="dot"></span><span>No posts yet — check back soon or read directly on <a href="http://www.buzzcrank.blogspot.com/" target="_blank" rel="noopener">buzzcrank.blogspot.com</a>.</span>';
           return;
         }
 
         statusEl.innerHTML =
-          '<span class="dot"></span><span>Latest from the Buzzcrank blog.</span>';
+          '<span class="dot"></span><span>Latest posts pulled straight from buzzcrank.blogspot.com.</span>';
 
-        gridEl.innerHTML = "";
-        posts.forEach((post) => {
+        listEl.innerHTML = "";
+        posts.slice(0, 3).forEach((post) => {
           const card = document.createElement("article");
           card.className = "blog-card";
 
           const title = post.title || "Untitled post";
-          const date = post.published || "";
-          const excerpt = post.excerpt || "";
-          const url = post.url || "https://buzzcrank.blogspot.com";
+          const date = post.date || "";
+          const url = post.url || post.link || "http://www.buzzcrank.blogspot.com/";
+          const excerpt = post.excerpt || post.summary || "";
 
           card.innerHTML = `
-            <div class="blog-title">${title}</div>
-            <div class="blog-meta">${date}</div>
-            <div class="blog-excerpt">${excerpt}</div>
-            <div class="blog-card-footer">
-              <span>Read more</span>
-              <button class="blog-link" type="button">Open post</button>
+            <div>
+              <div class="blog-title">${title}</div>
+              <div class="blog-meta">${date}</div>
+              ${
+                excerpt
+                  ? `<div class="blog-excerpt">${excerpt}</div>`
+                  : ""
+              }
+            </div>
+            <div>
+              <a class="blog-readmore" href="${url}" target="_blank" rel="noopener">
+                Read on Buzzcrank Blog →
+              </a>
             </div>
           `;
 
-          card.querySelector(".blog-link").addEventListener("click", () => {
-            window.open(url, "_blank");
-          });
-
-          gridEl.appendChild(card);
+          listEl.appendChild(card);
         });
       } catch (err) {
-        console.error("Failed to load blog posts", err);
+        console.error("Blog load failed", err);
         statusEl.innerHTML =
-          '<span class="dot" style="background:#ff5b7a; box-shadow:none;"></span><span>Couldn’t load posts. You can still read the blog directly on buzzcrank.blogspot.com.</span>';
+          '<span class="dot" style="background:#ff5b7a;box-shadow:none;"></span>' +
+          '<span>Couldn’t load posts. You can still read the blog directly on ' +
+          '<a href="http://www.buzzcrank.blogspot.com/" target="_blank" rel="noopener">buzzcrank.blogspot.com</a>.' +
+          "</span>";
       }
     })();
   </script>
