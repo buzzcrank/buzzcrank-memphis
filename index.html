@@ -54,32 +54,30 @@
       padding: 1.5rem 1.25rem 3rem;
     }
 
-    header {
+    /* HEADER */
+
+    header.main-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       gap: 1.5rem;
-      margin-bottom: 2.25rem;
+      margin-bottom: 1.75rem;
+      flex-wrap: wrap;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      flex-shrink: 0;
     }
 
-    .brand-mark {
-      width: 32px;
-      height: 32px;
+    .brand-logo {
+      width: 40px;
+      height: 40px;
       border-radius: 10px;
-      background: radial-gradient(circle at 30% 0, #ffe88a 0, #ffbf3c 40%, #ff5a1f 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: #130b05;
+      object-fit: cover;
       box-shadow: 0 8px 22px rgba(0, 0, 0, 0.6);
+      flex-shrink: 0;
     }
 
     .brand-title {
@@ -97,11 +95,19 @@
       margin-top: 0.05rem;
     }
 
+    .header-player {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      justify-content: center;
+    }
+
     .top-nav {
       display: flex;
       align-items: center;
       gap: 0.75rem;
       font-size: 0.8rem;
+      flex-shrink: 0;
     }
 
     .pill-link {
@@ -138,48 +144,10 @@
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
     }
 
-    /* Hero */
+    /* CTA band under header */
 
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
-      gap: 2.25rem;
-      align-items: center;
-      margin-bottom: 2.4rem;
-    }
-
-    .hero-left h1 {
-      font-size: clamp(2.2rem, 4vw, 2.9rem);
-      line-height: 1.05;
-      margin-bottom: 1rem;
-    }
-
-    .hero-left h1 span.highlight {
-      color: var(--accent);
-    }
-
-    .hero-sub {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      max-width: 34rem;
-      line-height: 1.6;
-      margin-bottom: 1.6rem;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.7rem;
-      font-size: 0.74rem;
-    }
-
-    .badge {
-      border-radius: var(--radius-pill);
-      padding: 0.25rem 0.7rem;
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      background: rgba(5, 6, 16, 0.7);
-      color: var(--text-muted);
+    .cta-band {
+      margin-bottom: 1.8rem;
     }
 
     .hero-actions {
@@ -215,31 +183,29 @@
       margin-top: 0.4rem;
     }
 
-    .hero-right {
-      justify-self: stretch;
-    }
-
-    /* Now streaming pill */
+    /* NOW STREAMING MINI PLAYER */
 
     .now-streaming {
-      margin-top: 0.75rem;
+      margin-top: 0;
+      width: 100%;
     }
 
     .stream-pill {
       display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      padding: 1rem 1.75rem 1.05rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 1rem 1.75rem;
       border-radius: var(--radius-pill);
       background: radial-gradient(circle at top left, #ffbf3c 0, #2b132f 45%, #060814 100%);
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75);
       max-width: 620px;
+      width: 100%;
     }
 
-    .stream-header {
-      display: flex;
-      flex-direction: column;
-      gap: 0.18rem;
+    .stream-info {
+      min-width: 0;
+      flex: 1;
     }
 
     .eyebrow {
@@ -247,30 +213,25 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: #ffe79f;
+      margin: 0 0 0.15rem;
+    }
+
+    .stream-title {
       margin: 0;
+      font-size: 1.05rem;
     }
 
-    .stream-headline {
-      font-size: 0.85rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .stream-body {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
+    .stream-tagline {
+      margin: 0.1rem 0 0.4rem;
+      font-size: 0.8rem;
+      opacity: 0.88;
     }
 
     .nowplaying-row {
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      margin-top: 0.1rem;
-      min-width: 0;
-      flex: 1;
+      margin-top: 0.2rem;
     }
 
     .np-art-wrap {
@@ -344,8 +305,6 @@
       width: 80px;
     }
 
-    /* Little animated bars */
-
     .mini-visualizer {
       display: flex;
       align-items: flex-end;
@@ -399,7 +358,7 @@
       }
     }
 
-    /* Events section */
+    /* EVENTS / BLOG SECTIONS (unchanged) */
 
     .section-label {
       font-size: 0.8rem;
@@ -508,21 +467,28 @@
       white-space: nowrap;
     }
 
-    /* Blog section */
+    footer {
+      padding: 0.8rem 1.25rem 1.3rem;
+      font-size: 0.75rem;
+      color: #65688b;
+      text-align: center;
+    }
+
+    /* BLOG CARDS */
 
     .blog-shell {
-      margin-top: 2rem;
-      padding: 1.2rem 1rem 1.3rem;
+      margin-top: 1.2rem;
+      padding: 1.2rem 1rem 1.1rem;
       border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top left, rgba(255, 191, 60, 0.16), rgba(7, 9, 22, 0.98));
+      background: linear-gradient(135deg, rgba(9, 12, 26, 0.96), rgba(6, 10, 22, 0.96));
       box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.04);
     }
 
     .blog-status {
       font-size: 0.8rem;
       color: var(--text-muted);
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.8rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -533,69 +499,66 @@
       height: 7px;
       border-radius: 999px;
       background: #ffbf3c;
-      box-shadow: 0 0 8px rgba(255, 191, 60, 0.9);
+      box-shadow: 0 0 6px rgba(255, 191, 60, 0.9);
     }
 
-    .blog-list {
-      list-style: none;
+    .blog-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
+      gap: 0.9rem;
     }
 
-    .blog-item {
-      padding: 0.75rem 0.75rem 0.9rem;
-      border-radius: 12px;
-      background: rgba(3, 7, 18, 0.92);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+    .blog-card {
+      border-radius: 14px;
+      padding: 0.8rem 0.85rem 0.9rem;
+      background: radial-gradient(circle at top left, rgba(255, 191, 60, 0.16), rgba(10, 13, 30, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.04);
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
-      cursor: pointer;
+      min-height: 140px;
     }
 
     .blog-title {
       font-size: 0.9rem;
-      font-weight: 600;
+      margin-bottom: 0.3rem;
     }
 
     .blog-meta {
       font-size: 0.75rem;
       color: var(--text-muted);
+      margin-bottom: 0.4rem;
     }
 
-    .blog-snippet {
-      font-size: 0.8rem;
-      color: #d4d6f0;
-      line-height: 1.4;
+    .blog-excerpt {
+      font-size: 0.78rem;
+      color: #d1d3f3;
       flex: 1;
     }
 
-    .blog-readmore {
-      font-size: 0.78rem;
-      margin-top: 0.35rem;
-      color: var(--accent-soft);
+    .blog-card-footer {
+      margin-top: 0.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
     }
 
-    footer {
-      padding: 0.8rem 1.25rem 1.3rem;
-      font-size: 0.75rem;
-      color: #65688b;
-      text-align: center;
+    .blog-link {
+      border-radius: 999px;
+      padding: 0.32rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(3, 7, 18, 0.85);
+      cursor: pointer;
     }
 
     @media (max-width: 840px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .hero-right {
-        order: -1;
+      .blog-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
     @media (max-width: 640px) {
-      header {
+      header.main-header {
         flex-direction: column;
         align-items: flex-start;
       }
@@ -603,9 +566,14 @@
       .top-nav {
         align-self: stretch;
         justify-content: space-between;
+        flex-wrap: wrap;
       }
 
-      .stream-body {
+      .header-player {
+        width: 100%;
+      }
+
+      .stream-pill {
         flex-direction: column;
         align-items: flex-start;
       }
@@ -619,8 +587,8 @@
         justify-self: flex-start;
       }
 
-      .blog-list {
-        grid-template-columns: 1fr;
+      .blog-grid {
+        grid-template-columns: minmax(0, 1fr);
       }
     }
   </style>
@@ -629,13 +597,98 @@
 <body>
   <main>
     <div class="page-wrap">
-      <header>
+      <!-- HEADER ROW: brand + mini player + nav -->
+      <header class="main-header">
         <div class="brand">
-          <div class="brand-mark">BC</div>
+          <img
+            class="brand-logo"
+            src="https://blogger.googleusercontent.com/img/a/AVvXsEg1kkIexWCkWc4UwcypDMQ7gTxd1CipMcv7c4KAWbCwy5UOq4VWJtxbh7Dan86Qv9blO_pU-SSZKDX7EGc-hM2sj_rgAmtfoL4l1g_8pA82P7aOG8j6OR4kEQTSAbR82OvCRAMAiZVz1sna47wmWXqJrRu_06ILfThnjgP1x3EiM4jPQv-tON2qSVyVhtI=s655"
+            alt="Buzzcrank Memphis logo"
+          />
           <div>
             <div class="brand-title">Buzzcrank Memphis</div>
             <div class="brand-sub">Blues • Soul • Rock • Revival</div>
           </div>
+        </div>
+
+        <div class="header-player">
+          <!-- NOW STREAMING MINI PLAYER -->
+          <section id="now-streaming" class="now-streaming">
+            <div class="stream-pill">
+              <div class="stream-info">
+                <p class="eyebrow">NOW STREAMING</p>
+                <h3 class="stream-title">Buzzcrank Revival Live</h3>
+                <p class="stream-tagline">
+                  Delta blues, soul, and rock from the river city.
+                </p>
+
+                <div class="nowplaying-row">
+                  <div class="np-art-wrap">
+                    <img id="npArt" alt="Album art" style="display:none;" />
+                    <span id="npArtFallback">BC</span>
+                  </div>
+                  <div class="np-text">
+                    <div class="np-title" id="npTitle">
+                      Loading current track…
+                    </div>
+                    <div class="np-artist" id="npArtist">
+                      Buzzcrank Revival Live
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stream-controls">
+                <audio id="miniAudio" preload="none"></audio>
+
+                <button
+                  id="miniPlayPause"
+                  class="icon-button"
+                  type="button"
+                  aria-label="Play stream"
+                >
+                  ▶
+                </button>
+
+                <div
+                  id="miniVisualizer"
+                  class="mini-visualizer"
+                  aria-hidden="true"
+                >
+                  <span></span><span></span><span></span><span></span>
+                </div>
+
+                <input
+                  id="miniVolume"
+                  class="mini-volume"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value="0.8"
+                  aria-label="Volume"
+                />
+
+                <button
+                  id="miniMute"
+                  class="icon-button"
+                  type="button"
+                  aria-label="Mute"
+                >
+                  🔈
+                </button>
+
+                <button
+                  id="miniPopout"
+                  class="icon-button"
+                  type="button"
+                  aria-label="Open full player"
+                >
+                  ↗
+                </button>
+              </div>
+            </div>
+          </section>
         </div>
 
         <nav class="top-nav">
@@ -651,7 +704,7 @@
           <button
             class="pill-link"
             type="button"
-            onclick="document.getElementById('blog').scrollIntoView({behavior:'smooth'})"
+            onclick="window.open('https://buzzcrank.blogspot.com','_blank')"
           >
             <span>Buzzcrank Blog</span>
           </button>
@@ -666,138 +719,30 @@
         </nav>
       </header>
 
-      <section class="hero">
-        <div class="hero-left">
-          <h1>
-            Soundtrack the
-            <span class="highlight">Memphis Revival.</span>
-          </h1>
-          <p class="hero-sub">
-            Buzzcrank Memphis is your AI-assisted guide to what’s happening
-            in the city — live music, venues, and a 24/7 blues-and-beyond
-            station that actually plays the locals.
-          </p>
+      <!-- CTA band (yellow section top) -->
+      <section class="cta-band">
+        <div class="hero-actions">
+          <button
+            class="hero-primary"
+            onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})"
+            type="button"
+          >
+            Browse Upcoming Shows
+          </button>
 
-          <div class="hero-badges">
-            <span class="badge">Live internet radio</span>
-            <span class="badge">Delta blues • Soul • Rock</span>
-            <span class="badge">Indie &amp; emerging artists</span>
-          </div>
-
-          <div class="hero-actions">
-            <button
-              class="hero-primary"
-              onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})"
-              type="button"
-            >
-              Browse Upcoming Shows
-            </button>
-
-            <button
-              class="hero-secondary"
-              onclick="window.location.href='admin.html'"
-              type="button"
-            >
-              Submit Your Band
-            </button>
-          </div>
-
-          <p class="hero-note">
-            Local artists, venues, and sponsors can all plug in here — Buzzcrank is built to be the station
-            Memphis shares.
-          </p>
+          <button
+            class="hero-secondary"
+            onclick="window.location.href='admin.html'"
+            type="button"
+          >
+            Submit Your Band
+          </button>
         </div>
 
-        <div class="hero-right">
-          <!-- NOW STREAMING MINI PLAYER -->
-          <section id="now-streaming" class="now-streaming">
-            <div class="stream-pill">
-              <div class="stream-header">
-                <p class="eyebrow">NOW STREAMING</p>
-                <div class="stream-headline">
-                  Buzzcrank Revival Live — Delta blues, soul, and rock from the river city.
-                </div>
-              </div>
-
-              <div class="stream-body">
-                <div class="nowplaying-row">
-                  <div class="np-art-wrap">
-                    <img
-                      id="npArt"
-                      alt="Album art"
-                      style="display:none;"
-                    />
-                    <span id="npArtFallback">BC</span>
-                  </div>
-                  <div class="np-text">
-                    <div class="np-title" id="npTitle">
-                      Loading current track…
-                    </div>
-                    <div class="np-artist" id="npArtist">
-                      Buzzcrank Revival Live
-                    </div>
-                  </div>
-                </div>
-
-                <div class="stream-controls">
-                  <!-- Hidden audio element -->
-                  <audio id="miniAudio" preload="none"></audio>
-
-                  <!-- Play / pause -->
-                  <button
-                    id="miniPlayPause"
-                    class="icon-button"
-                    type="button"
-                    aria-label="Play stream"
-                  >
-                    ▶
-                  </button>
-
-                  <!-- Simple “visualizer” -->
-                  <div
-                    id="miniVisualizer"
-                    class="mini-visualizer"
-                    aria-hidden="true"
-                  >
-                    <span></span><span></span><span></span><span></span>
-                  </div>
-
-                  <!-- Volume -->
-                  <input
-                    id="miniVolume"
-                    class="mini-volume"
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value="0.8"
-                    aria-label="Volume"
-                  />
-
-                  <!-- Mute -->
-                  <button
-                    id="miniMute"
-                    class="icon-button"
-                    type="button"
-                    aria-label="Mute"
-                  >
-                    🔈
-                  </button>
-
-                  <!-- Pop-out to full player -->
-                  <button
-                    id="miniPopout"
-                    class="icon-button"
-                    type="button"
-                    aria-label="Open full player"
-                  >
-                    ↗
-                  </button>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
+        <p class="hero-note">
+          Local artists, venues, and sponsors can all plug in here — Buzzcrank is built to be the station Memphis
+          shares.
+        </p>
       </section>
 
       <!-- EVENTS SECTION -->
@@ -822,7 +767,7 @@
 
       <!-- BLOG SECTION -->
       <section id="blog">
-        <div class="section-label">From the Buzzcrank Blog</div>
+        <div class="section-label">From the Buzzcrank blog</div>
 
         <div class="section-title-row">
           <h2>Stories, recaps &amp; river city rants</h2>
@@ -836,7 +781,13 @@
             <span class="dot"></span>
             <span>Loading latest posts…</span>
           </div>
-          <ul id="blogList" class="blog-list"></ul>
+
+          <div id="blogGrid" class="blog-grid"></div>
+
+          <div style="margin-top:0.9rem; font-size:0.78rem; color:var(--text-muted);">
+            Can’t see the feed? You can always browse directly on
+            <a href="https://buzzcrank.blogspot.com" target="_blank" rel="noopener">buzzcrank.blogspot.com</a>.
+          </div>
         </div>
       </section>
     </div>
@@ -846,7 +797,7 @@
     Buzzcrank Memphis • Built for blues, soul, and the river city’s next wave.
   </footer>
 
-  <!-- JS: events loader + blog loader + mini-player + now playing metadata -->
+  <!-- JS: events loader + mini-player + now playing metadata + Blogger feed -->
   <script>
     // === EVENT LIST FROM NETLIFY FUNCTION ===
     (async function loadEvents() {
@@ -888,7 +839,6 @@
           const whenCol = document.createElement("div");
           const ctaCol = document.createElement("div");
 
-          // Left: title + venue/city + tags
           mainCol.innerHTML = `
             <div class="event-main-title">${title}</div>
             <div class="event-meta">
@@ -896,20 +846,16 @@
             </div>
             ${
               tags.length
-                ? `<div class="event-tags">${tags
-                    .map((t) => "#" + t)
-                    .join("  ")}</div>`
+                ? `<div class="event-tags">${tags.map((t) => "#" + t).join("  ")}</div>`
                 : ""
             }
           `;
 
-          // Middle: date & time
           whenCol.innerHTML = `
             <div class="event-when">${date}</div>
             <div class="event-meta">${time}</div>
           `;
 
-          // Right: link button (if present)
           if (links.length > 0 && links[0].url) {
             const btn = document.createElement("button");
             btn.className = "event-link-btn";
@@ -931,101 +877,13 @@
         statusEl.innerHTML =
           '<span class="dot" style="background:' +
           "#ff5b7a" +
-          '; box-shadow:none;"></span><span>Couldn\'t reach the event feed. Try refreshing in a moment.</span>';
+          '; box-shadow:none;"></span><span>Couldn’t reach the event feed. Try refreshing in a moment.</span>';
       }
     })();
 
-    // === BLOG POSTS FROM BLOGGER FEED (via Netlify proxy) ===
-    (async function loadBlogPosts() {
-      const statusEl = document.getElementById("blogStatus");
-      const listEl = document.getElementById("blogList");
-      if (!statusEl || !listEl) return;
-
-      const BLOG_FEED_URL = "/.netlify/functions/blog";
-
-      try {
-        const res = await fetch(BLOG_FEED_URL, { cache: "no-store" });
-        if (!res.ok) throw new Error("HTTP " + res.status);
-
-        const data = await res.json();
-        const feed = data.feed || {};
-        const entries = feed.entry || [];
-
-        if (!entries.length) {
-          statusEl.innerHTML =
-            '<span class="dot"></span><span>No posts yet. When you publish on the Buzzcrank blog, they’ll show up here.</span>';
-          return;
-        }
-
-        statusEl.innerHTML =
-          '<span class="dot"></span><span>Latest from the Buzzcrank blog.</span>';
-        listEl.innerHTML = "";
-
-        entries.forEach((entry) => {
-          const title =
-            entry.title && entry.title.$t ? entry.title.$t : "Untitled post";
-
-          let linkHref = "#";
-          if (entry.link && entry.link.length) {
-            const altLink = entry.link.find((l) => l.rel === "alternate");
-            if (altLink && altLink.href) linkHref = altLink.href;
-          }
-
-          let published = "";
-          if (entry.published && entry.published.$t) {
-            const d = new Date(entry.published.$t);
-            if (!isNaN(d.getTime())) {
-              published = d.toLocaleDateString(undefined, {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              });
-            }
-          }
-
-          let snippet = "";
-          if (entry.summary && entry.summary.$t) {
-            snippet = entry.summary.$t;
-          } else if (entry.content && entry.content.$t) {
-            snippet = entry.content.$t;
-          }
-          // Strip HTML tags and trim
-          snippet = snippet.replace(/<[^>]+>/g, "");
-          if (snippet.length > 160) {
-            snippet = snippet.slice(0, 157) + "...";
-          }
-
-          const li = document.createElement("li");
-          li.className = "blog-item";
-
-          li.innerHTML = `
-            <div class="blog-title">${title}</div>
-            <div class="blog-meta">${published ? published : ""}</div>
-            <div class="blog-snippet">${snippet}</div>
-            <div class="blog-readmore">Read on the Buzzcrank blog →</div>
-          `;
-
-          li.addEventListener("click", () => {
-            window.open(linkHref, "_blank");
-          });
-
-          listEl.appendChild(li);
-        });
-      } catch (err) {
-        console.error("Failed to load blog posts", err);
-        statusEl.innerHTML =
-          '<span class="dot" style="background:' +
-          "#ff5b7a" +
-          '; box-shadow:none;"></span><span>Couldn\'t load posts. You can still read the blog directly.</span>';
-      }
-    })();
-
-    // === MINI PLAYER + NOW PLAYING METADATA (AzuraCast) ===
+    // === MINI PLAYER + NOW PLAYING METADATA ===
     (function () {
-      // Live365 stream URL
       const STREAM_URL = "https://streaming.live365.com/a26834";
-      // AzuraCast now-playing endpoint
-      const META_URL = "https://207.148.31.45/api/nowplaying/fall_festival";
 
       const audio = document.getElementById("miniAudio");
       const playPauseBtn = document.getElementById("miniPlayPause");
@@ -1090,7 +948,6 @@
 
       audio.addEventListener("ended", () => setPlayingState(false));
 
-      // Popout: open full player AND stop mini audio to prevent double-stream
       popoutBtn.addEventListener("click", () => {
         if (isPlaying) {
           audio.pause();
@@ -1102,32 +959,17 @@
         );
       });
 
-      // Now playing metadata loader (direct from AzuraCast)
       async function loadNowPlaying() {
         if (!npTitleEl || !npArtistEl || !npArtImg || !npArtFallback) return;
 
         try {
-          const res = await fetch(META_URL, { cache: "no-store" });
+          const res = await fetch("/.netlify/functions/nowplaying");
           if (!res.ok) throw new Error("HTTP " + res.status);
 
           const data = await res.json();
-
-          // Handle both array and single-object responses
-          let np;
-          if (Array.isArray(data)) {
-            np = (data[0] && (data[0].now_playing || data[0].nowPlaying)) || data[0];
-          } else {
-            np = data.now_playing || data.nowPlaying || data;
-          }
-
-          const song = (np && np.song) || np || {};
-
-          const title =
-            song.title || song.text || "Buzzcrank Revival Live";
-          const artist =
-            song.artist || "Memphis & beyond";
-          const art =
-            song.art || song.album_art || "";
+          const title = data.title || "Buzzcrank Revival Live";
+          const artist = data.artist || "Memphis & beyond";
+          const art = data.art || "";
 
           npTitleEl.textContent = title;
           npArtistEl.textContent = artist;
@@ -1142,13 +984,64 @@
           }
         } catch (err) {
           console.error("Failed to load now playing metadata", err);
-          // graceful fallback: leave whatever is there
         }
       }
 
-      // Initial fetch + periodic refresh
       loadNowPlaying();
       setInterval(loadNowPlaying, 30000);
+    })();
+
+    // === BLOGGER FEED LOADER ===
+    (async function loadBlog() {
+      const statusEl = document.getElementById("blogStatus");
+      const gridEl = document.getElementById("blogGrid");
+      if (!statusEl || !gridEl) return;
+
+      try {
+        const res = await fetch("/.netlify/functions/blogger");
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const posts = await res.json();
+
+        if (!Array.isArray(posts) || posts.length === 0) {
+          statusEl.innerHTML =
+            '<span class="dot"></span><span>No posts found yet. First rants are still brewing.</span>';
+          return;
+        }
+
+        statusEl.innerHTML =
+          '<span class="dot"></span><span>Latest from the Buzzcrank blog.</span>';
+
+        gridEl.innerHTML = "";
+        posts.forEach((post) => {
+          const card = document.createElement("article");
+          card.className = "blog-card";
+
+          const title = post.title || "Untitled post";
+          const date = post.published || "";
+          const excerpt = post.excerpt || "";
+          const url = post.url || "https://buzzcrank.blogspot.com";
+
+          card.innerHTML = `
+            <div class="blog-title">${title}</div>
+            <div class="blog-meta">${date}</div>
+            <div class="blog-excerpt">${excerpt}</div>
+            <div class="blog-card-footer">
+              <span>Read more</span>
+              <button class="blog-link" type="button">Open post</button>
+            </div>
+          `;
+
+          card.querySelector(".blog-link").addEventListener("click", () => {
+            window.open(url, "_blank");
+          });
+
+          gridEl.appendChild(card);
+        });
+      } catch (err) {
+        console.error("Failed to load blog posts", err);
+        statusEl.innerHTML =
+          '<span class="dot" style="background:#ff5b7a; box-shadow:none;"></span><span>Couldn’t load posts. You can still read the blog directly on buzzcrank.blogspot.com.</span>';
+      }
     })();
   </script>
 </body>
