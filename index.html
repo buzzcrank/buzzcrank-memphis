@@ -935,17 +935,16 @@
       }
     })();
 
-    // === BLOG POSTS FROM BLOGGER FEED ===
+    // === BLOG POSTS FROM BLOGGER FEED (via Netlify proxy) ===
     (async function loadBlogPosts() {
       const statusEl = document.getElementById("blogStatus");
       const listEl = document.getElementById("blogList");
       if (!statusEl || !listEl) return;
 
-      const BLOG_FEED_URL =
-        "http://www.buzzcrank.blogspot.com/feeds/posts/default?alt=json&max-results=3";
+      const BLOG_FEED_URL = "/.netlify/functions/blog";
 
       try {
-        const res = await fetch(BLOG_FEED_URL);
+        const res = await fetch(BLOG_FEED_URL, { cache: "no-store" });
         if (!res.ok) throw new Error("HTTP " + res.status);
 
         const data = await res.json();
@@ -963,7 +962,8 @@
         listEl.innerHTML = "";
 
         entries.forEach((entry) => {
-          const title = entry.title && entry.title.$t ? entry.title.$t : "Untitled post";
+          const title =
+            entry.title && entry.title.$t ? entry.title.$t : "Untitled post";
 
           let linkHref = "#";
           if (entry.link && entry.link.length) {
@@ -989,7 +989,7 @@
           } else if (entry.content && entry.content.$t) {
             snippet = entry.content.$t;
           }
-          // Strip HTML and trim
+          // Strip HTML tags and trim
           snippet = snippet.replace(/<[^>]+>/g, "");
           if (snippet.length > 160) {
             snippet = snippet.slice(0, 157) + "...";
