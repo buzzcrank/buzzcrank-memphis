@@ -508,6 +508,75 @@
       white-space: nowrap;
     }
 
+    /* Blog section */
+
+    .blog-shell {
+      margin-top: 2rem;
+      padding: 1.2rem 1rem 1.3rem;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(255, 191, 60, 0.16), rgba(7, 9, 22, 0.98));
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .blog-status {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .blog-status span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #ffbf3c;
+      box-shadow: 0 0 8px rgba(255, 191, 60, 0.9);
+    }
+
+    .blog-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .blog-item {
+      padding: 0.75rem 0.75rem 0.9rem;
+      border-radius: 12px;
+      background: rgba(3, 7, 18, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      cursor: pointer;
+    }
+
+    .blog-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .blog-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .blog-snippet {
+      font-size: 0.8rem;
+      color: #d4d6f0;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .blog-readmore {
+      font-size: 0.78rem;
+      margin-top: 0.35rem;
+      color: var(--accent-soft);
+    }
+
     footer {
       padding: 0.8rem 1.25rem 1.3rem;
       font-size: 0.75rem;
@@ -549,6 +618,10 @@
       .event-link-btn {
         justify-self: flex-start;
       }
+
+      .blog-list {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -568,11 +641,19 @@
         <nav class="top-nav">
           <button
             class="pill-link"
-            onclick="window.location.href='#events'"
+            onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})"
             type="button"
           >
             <span class="dot"></span>
             <span>Upcoming shows</span>
+          </button>
+
+          <button
+            class="pill-link"
+            type="button"
+            onclick="document.getElementById('blog').scrollIntoView({behavior:'smooth'})"
+          >
+            <span>Buzzcrank Blog</span>
           </button>
 
           <button
@@ -738,6 +819,26 @@
           <ul id="eventsList" class="event-list"></ul>
         </div>
       </section>
+
+      <!-- BLOG SECTION -->
+      <section id="blog">
+        <div class="section-label">From the Buzzcrank Blog</div>
+
+        <div class="section-title-row">
+          <h2>Stories, recaps &amp; river city rants</h2>
+          <p class="section-sub">
+            Latest posts pulled straight from your Buzzcrank Blogger site.
+          </p>
+        </div>
+
+        <div class="blog-shell">
+          <div class="blog-status" id="blogStatus">
+            <span class="dot"></span>
+            <span>Loading latest posts…</span>
+          </div>
+          <ul id="blogList" class="blog-list"></ul>
+        </div>
+      </section>
     </div>
   </main>
 
@@ -745,7 +846,7 @@
     Buzzcrank Memphis • Built for blues, soul, and the river city’s next wave.
   </footer>
 
-  <!-- JS: events loader + mini-player + now playing metadata -->
+  <!-- JS: events loader + blog loader + mini-player + now playing metadata -->
   <script>
     // === EVENT LIST FROM NETLIFY FUNCTION ===
     (async function loadEvents() {
@@ -834,7 +935,92 @@
       }
     })();
 
-    // === MINI PLAYER + NOW PLAYING METADATA ===
+    // === BLOG POSTS FROM BLOGGER FEED ===
+    (async function loadBlogPosts() {
+      const statusEl = document.getElementById("blogStatus");
+      const listEl = document.getElementById("blogList");
+      if (!statusEl || !listEl) return;
+
+      const BLOG_FEED_URL =
+        "http://www.buzzcrank.blogspot.com/feeds/posts/default?alt=json&max-results=3";
+
+      try {
+        const res = await fetch(BLOG_FEED_URL);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+
+        const data = await res.json();
+        const feed = data.feed || {};
+        const entries = feed.entry || [];
+
+        if (!entries.length) {
+          statusEl.innerHTML =
+            '<span class="dot"></span><span>No posts yet. When you publish on the Buzzcrank blog, they’ll show up here.</span>';
+          return;
+        }
+
+        statusEl.innerHTML =
+          '<span class="dot"></span><span>Latest from the Buzzcrank blog.</span>';
+        listEl.innerHTML = "";
+
+        entries.forEach((entry) => {
+          const title = entry.title && entry.title.$t ? entry.title.$t : "Untitled post";
+
+          let linkHref = "#";
+          if (entry.link && entry.link.length) {
+            const altLink = entry.link.find((l) => l.rel === "alternate");
+            if (altLink && altLink.href) linkHref = altLink.href;
+          }
+
+          let published = "";
+          if (entry.published && entry.published.$t) {
+            const d = new Date(entry.published.$t);
+            if (!isNaN(d.getTime())) {
+              published = d.toLocaleDateString(undefined, {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              });
+            }
+          }
+
+          let snippet = "";
+          if (entry.summary && entry.summary.$t) {
+            snippet = entry.summary.$t;
+          } else if (entry.content && entry.content.$t) {
+            snippet = entry.content.$t;
+          }
+          // Strip HTML and trim
+          snippet = snippet.replace(/<[^>]+>/g, "");
+          if (snippet.length > 160) {
+            snippet = snippet.slice(0, 157) + "...";
+          }
+
+          const li = document.createElement("li");
+          li.className = "blog-item";
+
+          li.innerHTML = `
+            <div class="blog-title">${title}</div>
+            <div class="blog-meta">${published ? published : ""}</div>
+            <div class="blog-snippet">${snippet}</div>
+            <div class="blog-readmore">Read on the Buzzcrank blog →</div>
+          `;
+
+          li.addEventListener("click", () => {
+            window.open(linkHref, "_blank");
+          });
+
+          listEl.appendChild(li);
+        });
+      } catch (err) {
+        console.error("Failed to load blog posts", err);
+        statusEl.innerHTML =
+          '<span class="dot" style="background:' +
+          "#ff5b7a" +
+          '; box-shadow:none;"></span><span>Couldn\'t load posts. You can still read the blog directly.</span>';
+      }
+    })();
+
+    // === MINI PLAYER + NOW PLAYING METADATA (AzuraCast) ===
     (function () {
       // Live365 stream URL
       const STREAM_URL = "https://streaming.live365.com/a26834";
