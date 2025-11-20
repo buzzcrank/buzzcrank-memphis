@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="Buzzcrank Memphis – your ***fixed***-assisted guide to blues, soul, and rock shows in the river city, plus a 24/7 revival radio stream."
+    content="Buzzcrank Memphis – your AI-assisted guide to blues, soul, and rock shows in the river city, plus a 24/7 revival radio stream."
   />
 
   <style>
@@ -239,6 +239,7 @@
 
     .stream-info {
       min-width: 0;
+      flex: 1;
     }
 
     .eyebrow {
@@ -255,9 +256,57 @@
     }
 
     .stream-tagline {
-      margin: 0.1rem 0 0;
+      margin: 0.1rem 0 0.4rem;
       font-size: 0.8rem;
       opacity: 0.88;
+    }
+
+    .nowplaying-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.2rem;
+    }
+
+    .np-art-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.5);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .np-art-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .np-text {
+      min-width: 0;
+    }
+
+    .np-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .np-artist {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.86);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .stream-controls {
@@ -353,6 +402,7 @@
       text-transform: uppercase;
       color: var(--accent-soft);
       margin-bottom: 0.4rem;
+      margin-top: 0.5rem;
     }
 
     .section-title-row {
@@ -582,6 +632,25 @@
                 <p class="stream-tagline">
                   Delta blues, soul, and rock from the river city.
                 </p>
+
+                <div class="nowplaying-row">
+                  <div class="np-art-wrap">
+                    <img
+                      id="npArt"
+                      alt="Album art"
+                      style="display:none;"
+                    />
+                    <span id="npArtFallback">BC</span>
+                  </div>
+                  <div class="np-text">
+                    <div class="np-title" id="npTitle">
+                      Loading current track…
+                    </div>
+                    <div class="np-artist" id="npArtist">
+                      Buzzcrank Revival Live
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div class="stream-controls">
@@ -670,7 +739,7 @@
     Buzzcrank Memphis • Built for blues, soul, and the river city’s next wave.
   </footer>
 
-  <!-- JS: events loader + mini-player -->
+  <!-- JS: events loader + mini-player + now playing metadata -->
   <script>
     // === EVENT LIST FROM NETLIFY FUNCTION ===
     (async function loadEvents() {
@@ -759,7 +828,7 @@
       }
     })();
 
-    // === MINI PLAYER ===
+    // === MINI PLAYER + NOW PLAYING METADATA ===
     (function () {
       // Live365 stream URL
       const STREAM_URL = "https://streaming.live365.com/a26834";
@@ -770,6 +839,11 @@
       const volSlider = document.getElementById("miniVolume");
       const visualizer = document.getElementById("miniVisualizer");
       const popoutBtn = document.getElementById("miniPopout");
+
+      const npTitleEl = document.getElementById("npTitle");
+      const npArtistEl = document.getElementById("npArtist");
+      const npArtImg = document.getElementById("npArt");
+      const npArtFallback = document.getElementById("npArtFallback");
 
       if (!audio || !playPauseBtn) return;
 
@@ -822,14 +896,52 @@
 
       audio.addEventListener("ended", () => setPlayingState(false));
 
+      // Popout: open full player AND stop mini audio to prevent double-stream
       popoutBtn.addEventListener("click", () => {
+        if (isPlaying) {
+          audio.pause();
+          setPlayingState(false);
+        }
         window.open(
           "https://comfy-meerkat-e400e1.netlify.app/buzzcrank-revival-live.html",
           "_blank"
         );
       });
+
+      // Now playing metadata loader
+      async function loadNowPlaying() {
+        if (!npTitleEl || !npArtistEl || !npArtImg || !npArtFallback) return;
+
+        try {
+          const res = await fetch("/.netlify/functions/nowplaying");
+          if (!res.ok) throw new Error("HTTP " + res.status);
+
+          const data = await res.json();
+          const title = data.title || "Buzzcrank Revival Live";
+          const artist = data.artist || "Memphis & beyond";
+          const art = data.art || "";
+
+          npTitleEl.textContent = title;
+          npArtistEl.textContent = artist;
+
+          if (art) {
+            npArtImg.src = art;
+            npArtImg.style.display = "block";
+            npArtFallback.style.display = "none";
+          } else {
+            npArtImg.style.display = "none";
+            npArtFallback.style.display = "block";
+          }
+        } catch (err) {
+          console.error("Failed to load now playing metadata", err);
+          // graceful fallback: leave whatever is there
+        }
+      }
+
+      // Initial fetch + periodic refresh
+      loadNowPlaying();
+      setInterval(loadNowPlaying, 30000);
     })();
   </script>
 </body>
 </html>
-
