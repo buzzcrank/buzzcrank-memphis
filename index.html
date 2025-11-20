@@ -227,19 +227,19 @@
 
     .stream-pill {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      padding: 1rem 1.75rem;
+      flex-direction: column;
+      gap: 0.65rem;
+      padding: 1rem 1.75rem 1.05rem;
       border-radius: var(--radius-pill);
       background: radial-gradient(circle at top left, #ffbf3c 0, #2b132f 45%, #060814 100%);
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75);
       max-width: 620px;
     }
 
-    .stream-info {
-      min-width: 0;
-      flex: 1;
+    .stream-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.18rem;
     }
 
     .eyebrow {
@@ -247,25 +247,30 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: #ffe79f;
-      margin: 0 0 0.15rem;
-    }
-
-    .stream-title {
       margin: 0;
-      font-size: 1.05rem;
     }
 
-    .stream-tagline {
-      margin: 0.1rem 0 0.4rem;
-      font-size: 0.8rem;
-      opacity: 0.88;
+    .stream-headline {
+      font-size: 0.85rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .stream-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
     .nowplaying-row {
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      margin-top: 0.2rem;
+      margin-top: 0.1rem;
+      min-width: 0;
+      flex: 1;
     }
 
     .np-art-wrap {
@@ -531,7 +536,7 @@
         justify-content: space-between;
       }
 
-      .stream-pill {
+      .stream-body {
         flex-direction: column;
         align-items: flex-start;
       }
@@ -626,13 +631,14 @@
           <!-- NOW STREAMING MINI PLAYER -->
           <section id="now-streaming" class="now-streaming">
             <div class="stream-pill">
-              <div class="stream-info">
+              <div class="stream-header">
                 <p class="eyebrow">NOW STREAMING</p>
-                <h3 class="stream-title">Buzzcrank Revival Live</h3>
-                <p class="stream-tagline">
-                  Delta blues, soul, and rock from the river city.
-                </p>
+                <div class="stream-headline">
+                  Buzzcrank Revival Live — Delta blues, soul, and rock from the river city.
+                </div>
+              </div>
 
+              <div class="stream-body">
                 <div class="nowplaying-row">
                   <div class="np-art-wrap">
                     <img
@@ -651,62 +657,62 @@
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="stream-controls">
-                <!-- Hidden audio element -->
-                <audio id="miniAudio" preload="none"></audio>
+                <div class="stream-controls">
+                  <!-- Hidden audio element -->
+                  <audio id="miniAudio" preload="none"></audio>
 
-                <!-- Play / pause -->
-                <button
-                  id="miniPlayPause"
-                  class="icon-button"
-                  type="button"
-                  aria-label="Play stream"
-                >
-                  ▶
-                </button>
+                  <!-- Play / pause -->
+                  <button
+                    id="miniPlayPause"
+                    class="icon-button"
+                    type="button"
+                    aria-label="Play stream"
+                  >
+                    ▶
+                  </button>
 
-                <!-- Simple “visualizer” -->
-                <div
-                  id="miniVisualizer"
-                  class="mini-visualizer"
-                  aria-hidden="true"
-                >
-                  <span></span><span></span><span></span><span></span>
+                  <!-- Simple “visualizer” -->
+                  <div
+                    id="miniVisualizer"
+                    class="mini-visualizer"
+                    aria-hidden="true"
+                  >
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+
+                  <!-- Volume -->
+                  <input
+                    id="miniVolume"
+                    class="mini-volume"
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value="0.8"
+                    aria-label="Volume"
+                  />
+
+                  <!-- Mute -->
+                  <button
+                    id="miniMute"
+                    class="icon-button"
+                    type="button"
+                    aria-label="Mute"
+                  >
+                    🔈
+                  </button>
+
+                  <!-- Pop-out to full player -->
+                  <button
+                    id="miniPopout"
+                    class="icon-button"
+                    type="button"
+                    aria-label="Open full player"
+                  >
+                    ↗
+                  </button>
                 </div>
-
-                <!-- Volume -->
-                <input
-                  id="miniVolume"
-                  class="mini-volume"
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value="0.8"
-                  aria-label="Volume"
-                />
-
-                <!-- Mute -->
-                <button
-                  id="miniMute"
-                  class="icon-button"
-                  type="button"
-                  aria-label="Mute"
-                >
-                  🔈
-                </button>
-
-                <!-- Pop-out to full player -->
-                <button
-                  id="miniPopout"
-                  class="icon-button"
-                  type="button"
-                  aria-label="Open full player"
-                >
-                  ↗
-                </button>
               </div>
             </div>
           </section>
@@ -824,7 +830,7 @@
         statusEl.innerHTML =
           '<span class="dot" style="background:' +
           "#ff5b7a" +
-          '; box-shadow:none;"></span><span>Couldn’t reach the event feed. Try refreshing in a moment.</span>';
+          '; box-shadow:none;"></span><span>Couldn\'t reach the event feed. Try refreshing in a moment.</span>';
       }
     })();
 
@@ -832,6 +838,8 @@
     (function () {
       // Live365 stream URL
       const STREAM_URL = "https://streaming.live365.com/a26834";
+      // AzuraCast now-playing endpoint
+      const META_URL = "https://207.148.31.45/api/nowplaying/fall_festival";
 
       const audio = document.getElementById("miniAudio");
       const playPauseBtn = document.getElementById("miniPlayPause");
@@ -908,18 +916,32 @@
         );
       });
 
-      // Now playing metadata loader
+      // Now playing metadata loader (direct from AzuraCast)
       async function loadNowPlaying() {
         if (!npTitleEl || !npArtistEl || !npArtImg || !npArtFallback) return;
 
         try {
-          const res = await fetch("/.netlify/functions/nowplaying");
+          const res = await fetch(META_URL, { cache: "no-store" });
           if (!res.ok) throw new Error("HTTP " + res.status);
 
           const data = await res.json();
-          const title = data.title || "Buzzcrank Revival Live";
-          const artist = data.artist || "Memphis & beyond";
-          const art = data.art || "";
+
+          // Handle both array and single-object responses
+          let np;
+          if (Array.isArray(data)) {
+            np = (data[0] && (data[0].now_playing || data[0].nowPlaying)) || data[0];
+          } else {
+            np = data.now_playing || data.nowPlaying || data;
+          }
+
+          const song = (np && np.song) || np || {};
+
+          const title =
+            song.title || song.text || "Buzzcrank Revival Live";
+          const artist =
+            song.artist || "Memphis & beyond";
+          const art =
+            song.art || song.album_art || "";
 
           npTitleEl.textContent = title;
           npArtistEl.textContent = artist;
