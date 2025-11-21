@@ -15,6 +15,7 @@
       --bg-card: #101322;
       --accent: #ffbf3c;
       --accent-soft: #ff9a5c;
+      --accent-deep: #e06b2d;
       --text-main: #f5f5ff;
       --text-muted: #a1a4c0;
       --danger: #ff5b7a;
@@ -51,89 +52,73 @@
     .page-wrap {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 0 1.25rem 3rem;
+      padding: 1.25rem 1.25rem 3rem;
     }
 
-    /* HEADER STRIP */
+    /* HEADER ROW  --------------------------------------------------------- */
 
     .site-header {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(14px);
-      background: linear-gradient(
-        120deg,
-        rgba(10, 8, 28, 0.96),
-        rgba(5, 5, 18, 0.96)
-      );
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0.75rem 0 1rem;
     }
 
-    .header-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0.85rem 1.25rem;
+    .header-brand {
       display: flex;
       align-items: center;
-      gap: 1rem;
-    }
-
-    .brand-block {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      min-width: 0;
+      gap: 0.9rem;
     }
 
     .brand-logo {
       width: 120px;
-      height: 52px;
+      height: 60px;
       object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.65);
       background: #000;
     }
 
     .brand-text {
       display: flex;
       flex-direction: column;
-      gap: 0.15rem;
+      gap: 0.1rem;
     }
 
     .brand-title {
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
-      font-size: 0.86rem;
-      white-space: nowrap;
+      font-size: 0.92rem;
     }
 
     .brand-sub {
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.18em;
       color: var(--text-muted);
-      white-space: nowrap;
     }
 
     .header-nav {
-      flex: 1;
       display: flex;
-      justify-content: flex-start;
-      gap: 0.5rem;
-      padding-left: 0.75rem;
+      justify-content: center;
+      gap: 0.75rem;
+      font-size: 0.8rem;
     }
 
     .pill-link {
       border-radius: var(--radius-pill);
       padding: 0.45rem 0.95rem;
-      background: rgba(7, 10, 26, 0.96);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(10, 14, 30, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
       cursor: pointer;
-      font-size: 0.8rem;
       color: var(--text-main);
-      white-space: nowrap;
+      transition: background 0.15s ease, border-color 0.15s ease,
+        transform 0.15s ease;
     }
 
     .pill-link span.dot {
@@ -145,83 +130,158 @@
     }
 
     .pill-link:hover {
-      background: rgba(19, 24, 52, 0.98);
+      background: rgba(21, 25, 48, 0.98);
+      border-color: rgba(255, 255, 255, 0.16);
+      transform: translateY(-1px);
     }
 
-    /* MINI PLAYER IN HEADER */
-
-    .header-player {
-      flex-shrink: 0;
-      max-width: 420px;
-      min-width: 260px;
+    .top-cta {
+      border-radius: var(--radius-pill);
+      padding: 0.5rem 1rem;
+      background: linear-gradient(120deg, var(--accent-soft), var(--accent));
+      color: #130805;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
+      font-size: 0.82rem;
+      white-space: nowrap;
     }
+
+    .top-cta:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .header-right {
+      min-width: 0;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* MINI PLAYER SHELL (markup injected by player.js)  ------------------- */
 
     .mini-player-pill {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      padding: 0.6rem 1rem;
+      gap: 1.1rem;
+      max-width: 460px;
+      width: 100%;
+      padding: 0.7rem 1.1rem;
       border-radius: var(--radius-pill);
-      background: radial-gradient(circle at top left, #ffbf3c 0, #2b132f 45%, #060814 100%);
-      box-shadow: var(--shadow-soft);
-      min-width: 0;
+      background: radial-gradient(circle at top left,
+        rgba(255, 191, 60, 0.9) 0,
+        #3a1638 42%,
+        #050713 100%);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.9);
     }
 
-    .mini-player-main {
+    .mini-player-left {
+      min-width: 0;
       flex: 1;
-      min-width: 0;
     }
 
-    .mini-player-top {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
+    .mini-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #ffe79f;
-      margin-bottom: 0.1rem;
+      margin-bottom: 0.12rem;
+    }
+
+    .mini-title-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .mini-stream-title {
+      font-size: 0.86rem;
+      font-weight: 600;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mini-live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.35);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
     }
 
     .mini-live-dot {
       width: 7px;
       height: 7px;
-      border-radius: 999px;
-      background: #32ff9b;
+      border-radius: 50%;
+      background: #40ff98;
       box-shadow: 0 0 8px rgba(72, 255, 173, 0.9);
     }
 
-    .mini-show-name {
-      font-weight: 600;
+    .mini-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-top: 0.3rem;
       font-size: 0.7rem;
     }
 
-    .mini-player-meta {
-      font-size: 0.78rem;
+    .mini-art {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.76);
+      flex-shrink: 0;
+    }
+
+    .mini-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mini-track-text {
+      min-width: 0;
+    }
+
+    .mini-track-title {
+      font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      opacity: 0.96;
     }
 
-    .mini-player-meta span.separator {
-      opacity: 0.55;
-      padding: 0 0.3rem;
+    .mini-track-artist {
+      color: rgba(255, 255, 255, 0.86);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .mini-player-controls {
+    .mini-player-right {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
       flex-shrink: 0;
     }
 
     .icon-button {
       border: none;
       outline: none;
-      background: rgba(0, 0, 0, 0.38);
+      background: rgba(0, 0, 0, 0.35);
       color: #fff;
       border-radius: 999px;
       width: 30px;
@@ -234,11 +294,11 @@
     }
 
     .icon-button:hover {
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.55);
     }
 
     .mini-volume {
-      width: 80px;
+      width: 70px;
     }
 
     .mini-visualizer {
@@ -246,15 +306,15 @@
       align-items: flex-end;
       justify-content: center;
       gap: 2px;
-      width: 28px;
-      height: 16px;
+      width: 22px;
+      height: 14px;
     }
 
     .mini-visualizer span {
       flex: 1;
       height: 4px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.35);
       transform-origin: bottom;
       animation: miniBar 1s ease-in-out infinite;
       animation-play-state: paused;
@@ -269,59 +329,18 @@
     .mini-visualizer span:nth-child(4) { animation-delay: 0.45s; }
 
     @keyframes miniBar {
-      0%   { height: 4px; }
-      50%  { height: 14px; }
+      0% { height: 4px; }
+      50% { height: 12px; }
       100% { height: 4px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .mini-visualizer span { animation: none; }
+      .mini-visualizer span {
+        animation: none;
+      }
     }
 
-    /* MAIN CONTENT SHELL */
-
-    .main-wrap {
-      padding-top: 1.75rem;
-    }
-
-    .hero-note {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin: -0.4rem 0 1.4rem;
-      max-width: 34rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      align-items: center;
-      margin-bottom: 1.4rem;
-    }
-
-    .hero-primary {
-      border-radius: var(--radius-pill);
-      padding: 0.7rem 1.5rem;
-      background: #fff;
-      color: #050713;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow-soft);
-      font-size: 0.9rem;
-    }
-
-    .hero-secondary {
-      border-radius: var(--radius-pill);
-      padding: 0.6rem 1.25rem;
-      background: rgba(14, 14, 24, 0.9);
-      color: var(--text-main);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-
-    /* Sections */
+    /* EVENTS SECTION  ----------------------------------------------------- */
 
     .section-label {
       font-size: 0.8rem;
@@ -329,7 +348,7 @@
       text-transform: uppercase;
       color: var(--accent-soft);
       margin-bottom: 0.4rem;
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
     }
 
     .section-title-row {
@@ -350,10 +369,12 @@
     }
 
     .events-shell {
-      margin-top: 1.2rem;
-      padding: 1.2rem 1rem 1rem;
+      margin-top: 0.9rem;
+      padding: 1.1rem 1rem 1rem;
       border-radius: var(--radius-lg);
-      background: linear-gradient(130deg, rgba(11, 15, 35, 0.96), rgba(6, 10, 26, 0.96));
+      background: linear-gradient(130deg,
+        rgba(11, 15, 35, 0.96),
+        rgba(6, 10, 26, 0.96));
       box-shadow: var(--shadow-soft);
       border: 1px solid rgba(255, 255, 255, 0.06);
     }
@@ -395,7 +416,9 @@
     }
 
     .event-item:hover {
-      background: radial-gradient(circle at top left, rgba(255, 191, 60, 0.14), rgba(10, 13, 30, 0.96));
+      background: radial-gradient(circle at top left,
+        rgba(255, 191, 60, 0.14),
+        rgba(10, 13, 30, 0.96));
       transform: translateY(-1px);
     }
 
@@ -430,53 +453,73 @@
       white-space: nowrap;
     }
 
-    /* Blog cards */
+    /* BLOG SECTION  ------------------------------------------------------- */
 
     .blog-shell {
-      margin-top: 1.1rem;
+      margin-top: 1.3rem;
+      padding: 1.1rem 1rem 1.15rem;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left,
+        rgba(255, 191, 60, 0.06),
+        rgba(4, 7, 20, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.8);
     }
 
-    .blog-list {
-      margin-top: 0.4rem;
+    .blog-status {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .blog-status span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ff6a76;
+    }
+
+    .blog-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 0.9rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.7rem;
     }
 
     .blog-card {
-      border-radius: 14px;
-      padding: 0.9rem 0.85rem;
-      background: radial-gradient(circle at top left, rgba(255, 191, 60, 0.16), rgba(8, 11, 27, 0.96));
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(4, 7, 20, 0.9);
+      border-radius: 12px;
+      padding: 0.9rem 0.85rem 0.85rem;
+      border: 1px solid rgba(255, 255, 255, 0.04);
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
-      min-height: 150px;
+      font-size: 0.8rem;
     }
 
-    .blog-card h3 {
+    .blog-title {
       font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.3;
     }
 
-    .blog-date {
+    .blog-meta {
       font-size: 0.72rem;
       color: var(--text-muted);
     }
 
     .blog-snippet {
       font-size: 0.78rem;
-      color: var(--text-muted);
-      line-height: 1.4;
+      color: #d0d3f5;
       flex: 1;
     }
 
     .blog-link {
-      margin-top: 0.3rem;
       font-size: 0.78rem;
-      color: #ffe79f;
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      align-self: flex-start;
+      margin-top: 0.25rem;
+      color: var(--accent-soft);
     }
 
     footer {
@@ -486,42 +529,25 @@
       text-align: center;
     }
 
-    /* Responsive tweaks */
-
-    @media (max-width: 920px) {
-      .header-inner {
-        flex-wrap: wrap;
-        align-items: flex-start;
-      }
-
-      .header-player {
-        width: 100%;
-        max-width: none;
-      }
-
-      .mini-player-pill {
-        margin-top: 0.35rem;
+    @media (max-width: 980px) {
+      .site-header {
+        grid-template-columns: 1fr;
+        row-gap: 0.9rem;
       }
 
       .header-nav {
-        padding-left: 0;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .header-nav {
-        width: 100%;
         justify-content: flex-start;
         flex-wrap: wrap;
       }
 
-      .brand-sub {
-        font-size: 0.7rem;
+      .header-right {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
       }
 
       .event-item {
@@ -537,135 +563,54 @@
 </head>
 
 <body>
-  <!-- HEADER STRIP -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="#" class="brand-block">
-        <img
-          src="https://blogger.googleusercontent.com/img/a/AVvXsEg1kkIexWCkWc4UwcypDMQ7gTxd1CipMcv7c4KAWbCwy5UOq4VWJtxbh7Dan86Qv9blO_pU-SSZKDX7EGc-hM2sj_rgAmtfoL4l1g_8pA82P7aOG8j6OR4kEQTSAbR82OvCRAMAiZVz1sna47wmWXqJrRu_06ILfThnjgP1x3EiM4jPQv-tON2qSVyVhtI=s655"
-          alt="Buzzcrank Memphis logo"
-          class="brand-logo"
-        />
-        <div class="brand-text">
-          <div class="brand-title">Buzzcrank Memphis</div>
-          <div class="brand-sub">Blues • Soul • Rock • Revival</div>
-        </div>
-      </a>
-
-      <nav class="header-nav">
-        <button
-          class="pill-link"
-          type="button"
-          onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})"
-        >
-          <span class="dot"></span>
-          <span>Upcoming shows</span>
-        </button>
-
-        <button
-          class="pill-link"
-          type="button"
-          onclick="document.getElementById('blog').scrollIntoView({behavior:'smooth'})"
-        >
-          <span>Buzzcrank Blog</span>
-        </button>
-      </nav>
-
-      <!-- MINI PLAYER -->
-      <div class="header-player">
-        <div class="mini-player-pill">
-          <div class="mini-player-main">
-            <div class="mini-player-top">
-              <span class="mini-live-dot"></span>
-              <span>Live now</span>
-              <span class="mini-show-name">Buzzcrank Revival Live</span>
-            </div>
-            <div class="mini-player-meta">
-              <span id="npTitle">Loading current track…</span>
-              <span class="separator">•</span>
-              <span id="npArtist">Delta blues, soul &amp; rock from the river city</span>
-            </div>
-          </div>
-
-          <div class="mini-player-controls">
-            <audio id="miniAudio" preload="none"></audio>
-
-            <button
-              id="miniPlayPause"
-              class="icon-button"
-              type="button"
-              aria-label="Play stream"
-            >
-              ▶
-            </button>
-
-            <div
-              id="miniVisualizer"
-              class="mini-visualizer"
-              aria-hidden="true"
-            >
-              <span></span><span></span><span></span><span></span>
-            </div>
-
-            <input
-              id="miniVolume"
-              class="mini-volume"
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value="0.8"
-              aria-label="Volume"
-            />
-
-            <button
-              id="miniMute"
-              class="icon-button"
-              type="button"
-              aria-label="Mute"
-            >
-              🔈
-            </button>
-
-            <button
-              id="miniPopout"
-              class="icon-button"
-              type="button"
-              aria-label="Open full player"
-              title="Open full player"
-            >
-              ↗
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
   <main>
-    <div class="page-wrap main-wrap">
-      <!-- quick intro actions -->
-      <div class="hero-actions">
-        <button
-          class="hero-primary"
-          type="button"
-          onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})"
-        >
-          Browse Upcoming Shows
-        </button>
+    <div class="page-wrap">
+      <!-- HEADER ROW (logo + nav + mini-player root) -->
+      <header class="site-header">
+        <div class="header-brand">
+          <img
+            src="https://blogger.googleusercontent.com/img/a/AVvXsEg1kkIexWCkWc4UwcypDMQ7gTxd1CipMcv7c4KAWbCwy5UOq4VWJtxbh7Dan86Qv9blO_pU-SSZKDX7EGc-hM2sj_rgAmtfoL4l1g_8pA82P7aOG8j6OR4kEQTSAbR82OvCRAMAiZVz1sna47wmWXqJrRu_06ILfThnjgP1x3EiM4jPQv-tON2qSVyVhtI=s655"
+            alt="Buzzcrank Memphis logo"
+            class="brand-logo"
+          />
+          <div class="brand-text">
+            <div class="brand-title">Buzzcrank Memphis</div>
+            <div class="brand-sub">Blues • Soul • Rock • Revival</div>
+          </div>
+        </div>
 
-        <button
-          class="hero-secondary"
-          type="button"
-          onclick="window.location.href='admin.html'"
-        >
-          Submit Your Band
-        </button>
-      </div>
-      <p class="hero-note">
-        Local artists, venues, and sponsors can all plug in here — Buzzcrank is
-        built to be the station Memphis shares.
-      </p>
+        <nav class="header-nav">
+          <button
+            class="pill-link"
+            type="button"
+            onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})"
+          >
+            <span class="dot"></span>
+            <span>Upcoming shows</span>
+          </button>
+
+          <button
+            class="pill-link"
+            type="button"
+            onclick="document.getElementById('blog').scrollIntoView({behavior:'smooth'})"
+          >
+            <span>Buzzcrank Blog</span>
+          </button>
+
+          <button
+            class="top-cta"
+            type="button"
+            onclick="window.open('https://comfy-meerkat-e400e1.netlify.app/buzzcrank-revival-live.html','_blank')"
+          >
+            Open full player
+          </button>
+        </nav>
+
+        <div class="header-right">
+          <!-- mini player markup is injected here by js/player.js -->
+          <div id="miniPlayerRoot"></div>
+        </div>
+      </header>
 
       <!-- EVENTS SECTION -->
       <section id="events">
@@ -688,8 +633,8 @@
       </section>
 
       <!-- BLOG SECTION -->
-      <section id="blog" style="margin-top: 2.4rem;">
-        <div class="section-label">From the Buzzcrank Blog</div>
+      <section id="blog">
+        <div class="section-label">From the Buzzcrank blog</div>
 
         <div class="section-title-row">
           <h2>Stories, recaps &amp; river city rants</h2>
@@ -698,12 +643,12 @@
           </p>
         </div>
 
-        <div class="events-shell blog-shell">
-          <div class="events-status" id="blogStatus">
+        <div class="blog-shell">
+          <div class="blog-status" id="blogStatus">
             <span class="dot"></span>
-            <span>Loading latest posts…</span>
+            <span>Loading posts from buzzcrank.blogspot.com…</span>
           </div>
-          <div id="blogList" class="blog-list"></div>
+          <div id="blogGrid" class="blog-grid"></div>
         </div>
       </section>
     </div>
@@ -713,264 +658,9 @@
     Buzzcrank Memphis • Built for blues, soul, and the river city’s next wave.
   </footer>
 
-  <!-- JS: events loader + mini-player + now playing metadata + blog loader -->
-  <script>
-    // === EVENT LIST FROM NETLIFY FUNCTION ===
-    (async function loadEvents() {
-      const statusEl = document.getElementById("eventsStatus");
-      const listEl = document.getElementById("eventsList");
-
-      if (!statusEl || !listEl) return;
-
-      try {
-        const res = await fetch("/.netlify/functions/events");
-        if (!res.ok) throw new Error("Network response not ok");
-
-        const data = await res.json();
-
-        if (!Array.isArray(data) || data.length === 0) {
-          statusEl.innerHTML =
-            '<span class="dot"></span><span>No events in the calendar yet — submit your show to get listed.</span>';
-          listEl.innerHTML = "";
-          return;
-        }
-
-        statusEl.innerHTML =
-          '<span class="dot"></span><span>Live feed synced. Here’s what’s coming up.</span>';
-
-        listEl.innerHTML = "";
-        data.forEach((ev) => {
-          const li = document.createElement("li");
-          li.className = "event-item";
-
-          const title = ev.title || "Untitled event";
-          const date = ev.date || "";
-          const time = ev.time || "";
-          const venue = ev.venue || "";
-          const city = ev.city || "";
-          const tags = Array.isArray(ev.tags) ? ev.tags : [];
-          const links = Array.isArray(ev.links) ? ev.links : [];
-
-          const mainCol = document.createElement("div");
-          const whenCol = document.createElement("div");
-          const ctaCol = document.createElement("div");
-
-          mainCol.innerHTML = `
-            <div class="event-main-title">${title}</div>
-            <div class="event-meta">
-              ${venue ? venue : ""}${venue && city ? " • " : ""}${city ? city : ""}
-            </div>
-            ${
-              tags.length
-                ? `<div class="event-tags">${tags
-                    .map((t) => "#" + t)
-                    .join("  ")}</div>`
-                : ""
-            }
-          `;
-
-          whenCol.innerHTML = `
-            <div class="event-when">${date}</div>
-            <div class="event-meta">${time}</div>
-          `;
-
-          if (links.length > 0 && links[0].url) {
-            const btn = document.createElement("button");
-            btn.className = "event-link-btn";
-            btn.type = "button";
-            btn.textContent = links[0].label || "View details";
-            btn.addEventListener("click", () => {
-              window.open(links[0].url, "_blank");
-            });
-            ctaCol.appendChild(btn);
-          }
-
-          li.appendChild(mainCol);
-          li.appendChild(whenCol);
-          li.appendChild(ctaCol);
-          listEl.appendChild(li);
-        });
-      } catch (err) {
-        console.error("Failed to load events", err);
-        statusEl.innerHTML =
-          '<span class="dot" style="background:' +
-          "#ff5b7a" +
-          '; box-shadow:none;"></span><span>Couldn’t reach the event feed. Try refreshing in a moment.</span>';
-      }
-    })();
-
-    // === MINI PLAYER + NOW PLAYING METADATA ===
-    (function () {
-      const STREAM_URL = "https://streaming.live365.com/a26834";
-
-      const audio = document.getElementById("miniAudio");
-      const playPauseBtn = document.getElementById("miniPlayPause");
-      const muteBtn = document.getElementById("miniMute");
-      const volSlider = document.getElementById("miniVolume");
-      const visualizer = document.getElementById("miniVisualizer");
-      const popoutBtn = document.getElementById("miniPopout");
-
-      const npTitleEl = document.getElementById("npTitle");
-      const npArtistEl = document.getElementById("npArtist");
-
-      if (!audio || !playPauseBtn) return;
-
-      audio.src = STREAM_URL;
-      audio.volume = parseFloat(volSlider.value || "0.8");
-      let isPlaying = false;
-
-      function setPlayingState(playing) {
-        isPlaying = playing;
-        playPauseBtn.textContent = playing ? "⏸" : "▶";
-        playPauseBtn.setAttribute(
-          "aria-label",
-          playing ? "Pause stream" : "Play stream"
-        );
-        if (playing) {
-          visualizer.classList.add("playing");
-        } else {
-          visualizer.classList.remove("playing");
-        }
-      }
-
-      playPauseBtn.addEventListener("click", () => {
-        if (!isPlaying) {
-          audio
-            .play()
-            .then(() => setPlayingState(true))
-            .catch((err) => {
-              console.error("Mini player play() failed", err);
-            });
-        } else {
-          audio.pause();
-          setPlayingState(false);
-        }
-      });
-
-      volSlider.addEventListener("input", () => {
-        const v = parseFloat(volSlider.value);
-        audio.volume = v;
-        muteBtn.textContent = (v === 0 || audio.muted) ? "🔇" : "🔈";
-      });
-
-      muteBtn.addEventListener("click", () => {
-        audio.muted = !audio.muted;
-        muteBtn.textContent = audio.muted ? "🔇" : "🔈";
-      });
-
-      audio.addEventListener("ended", () => setPlayingState(false));
-
-      // Popout: open full player AND stop mini audio
-      popoutBtn.addEventListener("click", () => {
-        if (isPlaying) {
-          audio.pause();
-          setPlayingState(false);
-        }
-        window.open(
-          "https://comfy-meerkat-e400e1.netlify.app/buzzcrank-revival-live.html",
-          "_blank"
-        );
-      });
-
-      async function loadNowPlaying() {
-        if (!npTitleEl || !npArtistEl) return;
-        try {
-          const res = await fetch("/.netlify/functions/nowplaying");
-          if (!res.ok) throw new Error("HTTP " + res.status);
-
-          const data = await res.json();
-          const title = data.title || "Buzzcrank Revival Live";
-          const artist = data.artist || "Memphis & beyond";
-
-          npTitleEl.textContent = title;
-          npArtistEl.textContent = artist;
-        } catch (err) {
-          console.error("Failed to load now playing metadata", err);
-          // leave default text
-        }
-      }
-
-      loadNowPlaying();
-      setInterval(loadNowPlaying, 30000);
-    })();
-
-    // === BLOG LOADER FROM BLOGGER ===
-    (async function loadBlog() {
-      const statusEl = document.getElementById("blogStatus");
-      const listEl = document.getElementById("blogList");
-      if (!statusEl || !listEl) return;
-
-      const FEED_URL =
-        "https://buzzcrank.blogspot.com/feeds/posts/default?alt=json";
-
-      function stripHtml(html) {
-        return (html || "").replace(/<[^>]+>/g, "");
-      }
-
-      function formatDate(isoLike) {
-        if (!isoLike) return "";
-        const d = new Date(isoLike);
-        if (Number.isNaN(d.getTime())) return "";
-        return d.toLocaleDateString(undefined, {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-        });
-      }
-
-      try {
-        const res = await fetch(FEED_URL);
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const json = await res.json();
-
-        const entries = (json.feed && json.feed.entry) || [];
-        if (!entries.length) {
-          statusEl.innerHTML =
-            '<span class="dot"></span><span>No posts yet — check back soon or read directly on <a href="https://buzzcrank.blogspot.com" target="_blank" rel="noopener" style="color:#ffe79f;text-decoration:underline;">buzzcrank.blogspot.com</a>.</span>';
-          return;
-        }
-
-        statusEl.innerHTML = "";
-
-        listEl.innerHTML = "";
-        entries.slice(0, 3).forEach((entry) => {
-          const title = entry.title && entry.title.$t ? entry.title.$t : "Untitled post";
-          const published = entry.published && entry.published.$t;
-          const dateStr = formatDate(published);
-
-          let link = "https://buzzcrank.blogspot.com";
-          if (Array.isArray(entry.link)) {
-            const alt = entry.link.find((l) => l.rel === "alternate");
-            if (alt && alt.href) link = alt.href;
-          }
-
-          const summaryRaw =
-            (entry.summary && entry.summary.$t) ||
-            (entry.content && entry.content.$t) ||
-            "";
-          let snippet = stripHtml(summaryRaw).trim();
-          if (snippet.length > 180) snippet = snippet.slice(0, 177) + "…";
-
-          const card = document.createElement("article");
-          card.className = "blog-card";
-          card.innerHTML = `
-            <h3>${title}</h3>
-            <div class="blog-date">${dateStr}</div>
-            <p class="blog-snippet">${snippet}</p>
-            <a class="blog-link" href="${link}" target="_blank" rel="noopener">
-              Read post ↗
-            </a>
-          `;
-          listEl.appendChild(card);
-        });
-      } catch (err) {
-        console.error("Failed to load blog posts", err);
-        statusEl.innerHTML =
-          '<span class="dot" style="background:' +
-          "#ff5b7a" +
-          '; box-shadow:none;"></span><span>Couldn’t load posts. You can still read the blog directly on <a href="https://buzzcrank.blogspot.com" target="_blank" rel="noopener" style="color:#ffe79f;text-decoration:underline;">buzzcrank.blogspot.com</a>.</span>';
-      }
-    })();
-  </script>
+  <!-- JS modules (one file per feature) -->
+  <script src="js/player.js" defer></script>
+  <script src="js/events.js" defer></script>
+  <script src="js/blog.js" defer></script>
 </body>
 </html>
