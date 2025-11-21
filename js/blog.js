@@ -7,7 +7,7 @@
   if (!statusEl || !gridEl) return;
 
   const FEED_URL =
-    "https://buzzcrank.blogspot.com/feeds/posts/default?alt=json&max-results=5";
+    "http://buzzcrank.blogspot.com/feeds/posts/default?alt=json&max-results=5";
 
   function stripHtml(html) {
     const tmp = document.createElement("div");
@@ -35,7 +35,7 @@
       const entries = (data.feed && data.feed.entry) || [];
       if (!entries.length) {
         statusEl.innerHTML =
-          '<span class="dot"></span><span>No posts yet — check back soon or read directly on <a href="https://buzzcrank.blogspot.com" target="_blank" rel="noopener">buzzcrank.blogspot.com</a>.</span>';
+          '<span class="dot"></span><span>No posts yet — check back soon or read directly on <a href="http://buzzcrank.blogspot.com" target="_blank" rel="noopener">buzzcrank.blogspot.com</a>.</span>';
         gridEl.innerHTML = "";
         return;
       }
@@ -58,7 +58,7 @@
 
         const altLink =
           (entry.link || []).find((l) => l.rel === "alternate") || {};
-        const url = altLink.href || "https://buzzcrank.blogspot.com";
+        const url = altLink.href || "http://buzzcrank.blogspot.com";
 
         const card = document.createElement("article");
         card.className = "blog-card";
@@ -77,7 +77,7 @@
       statusEl.innerHTML =
         '<span class="dot"></span>' +
         '<span>Couldn’t load posts. You can still read the blog directly on ' +
-        '<a href="https://buzzcrank.blogspot.com" target="_blank" rel="noopener">buzzcrank.blogspot.com</a>.</span>';
+        '<a href="http://buzzcrank.blogspot.com" target="_blank" rel="noopener">buzzcrank.blogspot.com</a>.</span>';
     }
   }
 
